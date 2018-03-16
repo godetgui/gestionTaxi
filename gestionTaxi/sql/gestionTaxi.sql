@@ -9,7 +9,7 @@ DROP TABLE Taxi;
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Taxi`;
+-- Structure de la table `Taxi`
 --
 CREATE TABLE Taxi (
 	idTaxi int NOT NULL PRIMARY KEY AUTO_INCREMENT,
