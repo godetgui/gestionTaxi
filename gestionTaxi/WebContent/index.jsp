@@ -10,9 +10,9 @@
 <body>
 	<h1>Commandez votre taxi</h1>
 	
-	<form methode=get action= >
-	<label>Ville</label><input type=text id=ville/>
-	<label>Date</label><input type=date id=date/>
+	<form methode=get action= FormulaireCommande >
+	<label>Ville</label><input type=text name=ville id=ville/>
+	<label>Date: </label><input type=date name=date id=date/>
 	<label>Catégorie</label>
 		<select name=categorie id=categorie>
 		<option>Touktouk (2 places)
