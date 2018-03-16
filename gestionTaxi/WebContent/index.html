@@ -2,9 +2,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Bienvenur sur GestionTaxi !</title>
+<title>Gestion Taxi</title>
 </head>
 <body>
-Hello world ! 
+	<form>
+	Insérer une date et une heure : <input type="date" name="date_depart"/><br/>
+	Insérer une ville de destination : <input type="text" name="destination"/><br/>
+	Insérer une catégorie de véhicule : 
+	<select name="choix_categorie" size="3"><br/>
+	<option>SUV</option>
+	<option>Citadine</option>
+	<option>4x4</option>
+	</select><br/>
+	<input type="submit" value="Rechercher" name="trouverTaxi"/><br/>
+	</form>
 </body>
 </html>
