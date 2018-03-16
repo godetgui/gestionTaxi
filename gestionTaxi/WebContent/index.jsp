@@ -67,7 +67,8 @@
 		<option>30
 		<option>31
 		</select>
-	
+	</br>
+	</br>
 	<label>Catégorie</label>
 		<select name=categorie id=categorie>
 		<option>Touktouk (2 places)
