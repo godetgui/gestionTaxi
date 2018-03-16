@@ -65,7 +65,7 @@ CREATE TABLE `Taxi` (
   `idTaxi` int(11) NOT NULL,
   `categorie` varchar(50) NOT NULL,
   `tarifDeBase` decimal(10,0) NOT NULL,
-  `ville` int(11) NOT NULL
+  `ville` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
