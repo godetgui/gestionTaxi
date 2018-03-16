@@ -8,31 +8,33 @@
 <title>Bienvenue sur Gestion Taxi !</title>
 </head>
 <body>
-	<h1>Commandez votre taxi</h1>
+	<h1>Commandez votre taxi !</h1>
 	
 	<form methode=get action= FormulaireCommande >
-	<label>Ville</label><input type=text name=ville id=ville/>
-	Date:<label>Année</label><select name=date id=date>
+	<label>Ville : </label><input type=text name=ville id=ville/>
+	</br>
+	</br>
+	Date : <label> Année </label><select name=date id=date>
 		<option>2022
 		<option>2021
 		<option>2020
 		<option>2019
 		<option>2018
 		</select>
-	<label>Mois</label><select name=mois id=mois>
+	<label>Mois </label><select name=mois id=mois>
 		<option>septembre
 		<option>octobre
 		<option>novembre
-		<option>decembre
+		<option>décembre
 		<option>janvier
-		<option>fevrier
+		<option>février
 		<option>avril
 		<option>mai
 		<option>juin
 		<option>juillet
-		<option>aout
+		<option>août
 		</select>
-	<label>Mois</label><select name=mois id=mois>
+	<label>Jour </label><select name=jour id=jour>
 		<option>01
 		<option>02
 		<option>03
