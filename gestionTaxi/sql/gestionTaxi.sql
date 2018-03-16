@@ -42,7 +42,7 @@ CREATE TABLE `Client` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Reservation`
+-- Structure de la table `Reservation`;
 --
 
 CREATE TABLE `Reservation` (
