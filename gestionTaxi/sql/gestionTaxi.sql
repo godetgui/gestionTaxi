@@ -1,22 +1,4 @@
--- phpMyAdmin SQL Dump
--- version 4.7.9
--- https://www.phpmyadmin.net/
---
--- Hôte : localhost
--- Généré le :  ven. 16 mars 2018 à 13:11
--- Version du serveur :  5.7.21
--- Version de PHP :  5.6.30
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
 DROP TABLE Reservation;
 DROP TABLE Client;
 DROP TABLE Taxi;
@@ -32,7 +14,7 @@ DROP TABLE Taxi;
 --
 
 CREATE TABLE `Client` (
-  `idClient` int(11) NOT NULL,
+  `idClient` int AUTO_INCREMENT NOT NULL,
   `nom` varchar(50) NOT NULL,
   `prenom` varchar(50) NOT NULL,
   `adresse` varchar(200) NOT NULL,
@@ -46,13 +28,12 @@ CREATE TABLE `Client` (
 --
 
 CREATE TABLE `Reservation` (
-  `idReservation` int(11) NOT NULL,
-  `dateReservation` date DEFAULT NULL,
-  `heure` time DEFAULT NULL,
-  `destination` varchar(50) DEFAULT NULL,
-  `booleenPaiementEffectue` tinyint(1) DEFAULT NULL,
-  `idClient` int(11) DEFAULT NULL,
-  `idTaxi` int(11) DEFAULT NULL
+  `idReservation` int AUTO_INCREMENT NOT NULL,
+  `dateReservation` datetime NOT NULL,
+  `destination` varchar(50) NOT NULL,
+  `booleenPaiementEffectue` tinyint DEFAULT 0,
+  `idClient` int NOT NULL,
+  `idTaxi` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -62,15 +43,13 @@ CREATE TABLE `Reservation` (
 --
 
 CREATE TABLE `Taxi` (
-  `idTaxi` int(11) NOT NULL,
+  `idTaxi` int NOT NULL,
   `categorie` varchar(50) NOT NULL,
-  `tarifDeBase` decimal(10,0) NOT NULL,
+  `tarifDeBase` decimal(10,2) NOT NULL,
   `ville` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Index pour les tables déchargées
---
+
 
 --
 -- Index pour la table `Client`
@@ -104,6 +83,3 @@ ALTER TABLE `Reservation`
   ADD CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`idTaxi`) REFERENCES `Taxi` (`idTaxi`);
 COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
