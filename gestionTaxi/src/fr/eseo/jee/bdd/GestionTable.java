@@ -23,7 +23,7 @@ public class GestionTable {
 		ArrayList<String> result=new ArrayList<String>();
 		try {
 			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-			Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/Sujet4?&characterEncoding=UTF8&useSSL=true&user=root&password=password");
+			Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/GestionTaxi?&characterEncoding=UTF8&useSSL=true&user=root&password=root");
 			Statement stat = connect.createStatement();
 //			stat.executeQuery("SELECT COUNT(DISTINCT Taxi.ville) AS nombre FROM TAXI");
 			stat.executeQuery("SELECT Taxi.ville FROM Taxi GROUP BY Taxi.ville");
