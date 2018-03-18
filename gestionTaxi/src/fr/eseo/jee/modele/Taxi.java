@@ -6,10 +6,10 @@ package fr.eseo.jee.modele;
  */
 public class Taxi {
 
-	int idTaxi;
-	String categorie;
-	String ville;
-	String tarifDeBase;
+	private int idTaxi;
+	private String categorie;
+	private String ville;
+	private String tarifDeBase;
 
 	public Taxi(int idTaxi, String categorie, String ville, String tarifDeBase) {
 		this.idTaxi = idTaxi;

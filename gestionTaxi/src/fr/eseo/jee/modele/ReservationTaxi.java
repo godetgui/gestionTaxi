@@ -1,14 +1,13 @@
 package fr.eseo.jee.modele;
 
-import java.util.Calendar;
+import java.util.Date;
 
 public class ReservationTaxi {
 	
-	int idReservation;
-	Calendar date;
-	Calendar heure;
-	String destination;
-	boolean paiementEffectue;
+	private int idReservation;
+	private Date dateReservation;
+	private String destination;
+	private boolean paiementEffectue;
 	
 	public int getIdReservation() {
 		return idReservation;
@@ -16,18 +15,13 @@ public class ReservationTaxi {
 	public void setIdReservation(int idReservation) {
 		this.idReservation = idReservation;
 	}
-	public Calendar getDate() {
-		return date;
+	public Date getDateReservation() {
+		return dateReservation;
 	}
-	public void setDate(Calendar date) {
-		this.date = date;
+	public void setDateReservation(Date dateReservations) {
+		this.dateReservation = dateReservation;
 	}
-	public Calendar getHeure() {
-		return heure;
-	}
-	public void setHeure(Calendar heure) {
-		this.heure = heure;
-	}
+	
 	public String getDestination() {
 		return destination;
 	}
@@ -42,12 +36,11 @@ public class ReservationTaxi {
 	}
 	
 	
-	public ReservationTaxi(int idReservation, Calendar date, Calendar heure, String destination,
+	public ReservationTaxi(int idReservation, Date dateReservation, String destination,
 			boolean paiementEffectue) {
 		super();
 		this.idReservation = idReservation;
-		this.date = date;
-		this.heure = heure;
+		this.dateReservation = dateReservation;
 		this.destination = destination;
 		this.paiementEffectue = paiementEffectue;
 	}
