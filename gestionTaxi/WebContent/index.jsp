@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
@@ -43,7 +42,7 @@
 		<option>septembre</option>
 		<option>octobre</option>
 		<option>novembre</option>
-		<option>décembre</option>
+		<option>decembre</option>
 		</select>
 	<label>Jour </label><select name="jour" id="jour">
 		<option>01
@@ -82,10 +81,10 @@
 	</br>
 	<label>Catégorie</label>
 		<select name="categorie" id="categorie">
-		<option>Touktouk (2 places)
-		<option>Citadine (4 places)
-		<option>Mini Bus (8 places)
-		<option>Limousine (8 places)
+		<option>Touktouk 
+		<option>Citadine 
+		<option>Minibus 
+		<option>Limousine 
 		</select></br></br>
 	<button type="submit" value="reserverMaintenant">Réserver maintenant</button>
 	
