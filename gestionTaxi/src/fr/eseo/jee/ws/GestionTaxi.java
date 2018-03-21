@@ -13,16 +13,23 @@ public class GestionTaxi {
 		
 	public ArrayList<Taxi> trouverTaxi(String ville, String categorie) {
 		ArrayList<Taxi> result = new ArrayList<Taxi>();
-//		String request = "SELECT * FROM Taxi WHERE NOT EXISTS (SELECT * FROM Reservation WHERE Taxi.idTaxi=Reservation.idTaxi) AND Taxi.ville="+"'"+ville+"'"+ "and Taxi.categorie="+"'"+categorie+"'";
 		String request = "SELECT * FROM Taxi WHERE NOT EXISTS (SELECT * FROM Reservation WHERE Taxi.idTaxi=Reservation.idTaxi) AND Taxi.ville="+"'"+ville+"'"+ "and Taxi.categorie="+"'"+categorie+"'";
+		Taxi taxi = new Taxi();
 		try {
 			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-			Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/GestionTaxi?&characterEncoding=UTF8&useSSL=true&user=user&password=user");
+			Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/gestionTaxi?&characterEncoding=UTF8&useSSL=true&user=root&password=root");
 			Statement stat = connect.createStatement();
 			stat.executeQuery(request);
 			ResultSet rset = stat.getResultSet();
 			while(rset.next()) {
-				result.add(new Taxi());
+				taxi.setIdTaxi(rset.getInt("idTaxi"));
+				taxi.setCategorie(rset.getString("categorie"));
+				taxi.setVille(rset.getString("ville"));
+				taxi.setTarifDeBase(rset.getString("tarifDeBase"));
+				result.add(taxi);
+			}
+			for(int i=0;i<result.size();i++) {
+				System.out.println("taxis="+result.get(i).getIdTaxi());
 			}
 			rset.close();
 			stat.close();

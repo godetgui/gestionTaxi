@@ -10,10 +10,10 @@
 <body>
 	<h1>Commandez votre taxi !</h1>
 	
-	<form methode="post" action="FormulaireCommande">
+	<form methode="post" action="RechercherTaxi">
 	<label>Ville : </label>
 	<%java.util.ArrayList<String> villes = fr.eseo.jee.bdd.GestionTable.getVille();%>
-	<select name="villes">
+	<select name="ville">
 	<%for(int i=0;i<villes.size();i++) {%>
 		<option><%=villes.get(i)%></option>
 	<%}%>
@@ -21,15 +21,9 @@
 	</br>
 	</br>
 	Date : <label> Année </label><select name="annee" id="annee">
-		<option>2018</option>
-		<option>2019</option>
-		<option>2020</option>
-		<option>2021</option>
-		<option>2022</option>
-		<option>2023</option>
-		<option>2024</option>
-		<option>2025</option>
-		<option>2026</option>
+		<% for(int annee=2018;annee<=2022;annee++){ %>
+		<option><%=annee%></option>
+		<% } %>
 		</select>
 	<label>Mois </label><select name="mois" id="mois">
 		<option>janvier</option>
@@ -82,21 +76,14 @@
 	</br>
 	<label>Catégorie</label>
 		<select name="categorie" id="categorie">
-		<option>Touktouk (2 places)
-		<option>Citadine (4 places)
-		<option>Mini Bus (8 places)
-		<option>Limousine (8 places)
+			<option>Touktouk</option>
+			<option>Citadine</option>
+			<option>Minibus</option>
+			<option>Limousine</option>
 		</select></br></br>
-	<button type="submit" value="reserverMaintenant">Réserver maintenant</button>
+	<button type="submit" value="reserverMaintenant">Rechercher les taxis disponibles</button>
 	
 	</form>
-	
-	
-	
-	
-	
-	
-	
-	
+
 </body>
 </html>
