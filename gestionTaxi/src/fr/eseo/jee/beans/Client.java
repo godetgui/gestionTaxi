@@ -1,4 +1,4 @@
-package fr.eseo.jee.modele;
+package fr.eseo.jee.beans;
 
 /**
  * 
@@ -14,13 +14,8 @@ public class Client {
 	private String adresse;
 	private String telephone;
 	
-	public Client(int idClient, String nom, String prenom, String adresse, String telephone) {
+	public Client() {
 		super();
-		this.idClient=idClient;
-		this.nom=nom;
-		this.prenom=prenom;
-		this.adresse=adresse;
-		this.telephone=telephone;
 	}
 
 	public int getIdClient() {

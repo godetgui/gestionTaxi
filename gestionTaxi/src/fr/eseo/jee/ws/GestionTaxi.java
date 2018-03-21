@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import fr.eseo.jee.modele.Taxi;
+import fr.eseo.jee.beans.Taxi;
 
 public class GestionTaxi {
 		
@@ -22,7 +22,7 @@ public class GestionTaxi {
 			stat.executeQuery(request);
 			ResultSet rset = stat.getResultSet();
 			while(rset.next()) {
-				result.add(new Taxi(rset.getInt("idTaxi"),rset.getString("categorie"),rset.getString("tarifDeBase"),rset.getString("ville")));
+				result.add(new Taxi());
 			}
 			rset.close();
 			stat.close();
