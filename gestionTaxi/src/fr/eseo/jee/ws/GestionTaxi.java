@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import fr.eseo.jee.modele.Taxi;
+import fr.eseo.jee.beans.Taxi;
 
 public class GestionTaxi {
 		
