@@ -15,7 +15,7 @@
 <% for(int i=0;i<taxis.size();i++){%>
 	Taxi n°<%=i%> : <%=taxis.get(i).getIdTaxi()%>
 	<form method="post" action="">
-		<input type="submit" value="Réserver" name="Réserver">"/><br/></br>
+		<input type="submit" value="Réserver" name="Réserver"><br/></br>
 	</form>
 <%}%>
 </body>
