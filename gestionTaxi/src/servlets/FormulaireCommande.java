@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import fr.eseo.jee.modele.Taxi;
+import fr.eseo.jee.beans.Taxi;
 import fr.eseo.jee.ws.GestionTaxi;
 
 /**

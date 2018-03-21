@@ -1,4 +1,4 @@
-package fr.eseo.jee.modele;
+package fr.eseo.jee.beans;
 
 /**
  * 
