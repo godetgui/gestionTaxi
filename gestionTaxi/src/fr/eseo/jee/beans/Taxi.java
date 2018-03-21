@@ -11,11 +11,8 @@ public class Taxi {
 	private String ville;
 	private String tarifDeBase;
 
-	public Taxi(int idTaxi, String categorie, String ville, String tarifDeBase) {
-		this.idTaxi = idTaxi;
-		this.categorie = categorie;
-		this.ville = ville;
-		this.tarifDeBase = tarifDeBase;
+	public Taxi() {
+		super();
 	}
 
 	public int getIdTaxi() {

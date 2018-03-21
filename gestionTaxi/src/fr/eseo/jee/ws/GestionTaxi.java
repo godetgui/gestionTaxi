@@ -22,7 +22,7 @@ public class GestionTaxi {
 			stat.executeQuery(request);
 			ResultSet rset = stat.getResultSet();
 			while(rset.next()) {
-				result.add(new Taxi(rset.getInt("idTaxi"),rset.getString("categorie"),rset.getString("tarifDeBase"),rset.getString("ville")));
+				result.add(new Taxi());
 			}
 			rset.close();
 			stat.close();

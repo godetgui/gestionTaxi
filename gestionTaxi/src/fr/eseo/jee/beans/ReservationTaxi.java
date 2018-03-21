@@ -9,6 +9,11 @@ public class ReservationTaxi {
 	private String destination;
 	private boolean paiementEffectue;
 	
+	//Constructeur 
+	public ReservationTaxi() {
+		super();
+	}
+	
 	public int getIdReservation() {
 		return idReservation;
 	}
@@ -18,7 +23,7 @@ public class ReservationTaxi {
 	public Date getDateReservation() {
 		return dateReservation;
 	}
-	public void setDateReservation(Date dateReservations) {
+	public void setDateReservation(Date dateReservation) {
 		this.dateReservation = dateReservation;
 	}
 	
@@ -34,17 +39,5 @@ public class ReservationTaxi {
 	public void setPaiementEffectue(boolean paiementEffectue) {
 		this.paiementEffectue = paiementEffectue;
 	}
-	
-	
-	public ReservationTaxi(int idReservation, Date dateReservation, String destination,
-			boolean paiementEffectue) {
-		super();
-		this.idReservation = idReservation;
-		this.dateReservation = dateReservation;
-		this.destination = destination;
-		this.paiementEffectue = paiementEffectue;
-	}
-	
-	
 
 }
