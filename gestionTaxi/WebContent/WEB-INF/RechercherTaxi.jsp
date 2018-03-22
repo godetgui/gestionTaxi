@@ -25,18 +25,18 @@
 		<% } %>
 		</select>
 	<label>Mois </label><select name="mois" id="mois">
-		<option>01</option>
-		<option>02</option>
-		<option>03</option>
-		<option>04</option>
-		<option>05</option>
-		<option>06</option>
-		<option>07</option>
-		<option>08</option>
-		<option>09</option>
-		<option>10</option>
-		<option>11</option>
-		<option>12</option>
+		<option>janvier</option>
+		<option>février</option>
+		<option>mars</option>
+		<option>avril</option>
+		<option>mai</option>
+		<option>juin</option>
+		<option>juillet</option>
+		<option>août</option>
+		<option>septembre</option>
+		<option>octobre</option>
+		<option>novembre</option>
+		<option>decembre</option>
 		</select>
 	<label>Jour </label><select name="jour" id="jour">
 		<option>01
@@ -71,45 +71,21 @@
 		<option>30
 		<option>31
 		</select>
-		<label>hh </label><select name="heure" id="heure">
-		<option>00
-		<option>01
-		<option>02
-		<option>03
-		<option>04
-		<option>05
-		<option>06
-		<option>07
-		<option>08
-		<option>09
-		<option>10
-		<option>11
-		<option>12
-		<option>13
-		<option>14
-		<option>15
-		<option>16
-		<option>17
-		<option>18
-		<option>19
-		<option>20
-		<option>21
-		<option>22
-		<option>23
-		</select>
-		<label> mn </label><select name="minute" id="minute">
-		<% for(int mn=0;mn<=59;mn++){ %>
-		<option><%=mn%></option>
-		<% } %>
-		</select>
 	</br>
 	</br>
 	<label>Catégorie</label>
 		<select name="categorie" id="categorie">
+<<<<<<< HEAD
 		<option>Touktouk 
 		<option>Citadine 
 		<option>Minibus 
 		<option>Limousine 
+=======
+			<option>Touktouk</option>
+			<option>Citadine</option>
+			<option>Minibus</option>
+			<option>Limousine</option>
+>>>>>>> branch 'master' of https://github.com/godetgui/gestionTaxi.git
 		</select></br></br>
 	<button type="submit" value="reserverMaintenant">Rechercher les taxis disponibles</button>
 	
