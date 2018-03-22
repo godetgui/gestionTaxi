@@ -14,7 +14,7 @@
 <label>Voici les taxis de catégorie <%=taxis.get(0).getCategorie()%> disponibles à <%=taxis.get(0).getVille()%> :</label></br></br>
 <% for(int i=0;i<taxis.size();i++){%>
 	Taxi n°<%=i%> : <%=taxis.get(i).getIdTaxi()%>
-	<form method="post" action="">
+	<form method="post" action="Reservation">
 		<input type="submit" value="Réserver" name="Réserver"><br/></br>
 	</form>
 <%}%>

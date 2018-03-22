@@ -17,7 +17,7 @@ public class GestionTaxi {
 		Taxi taxi = new Taxi();
 		try {
 			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-			Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/gestionTaxi?&characterEncoding=UTF8&useSSL=true&user=root&password=root");
+			Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/gestionTaxi?&characterEncoding=UTF8&useSSL=true&user=user&password=user");
 			Statement stat = connect.createStatement();
 			stat.executeQuery(request);
 			ResultSet rset = stat.getResultSet();
