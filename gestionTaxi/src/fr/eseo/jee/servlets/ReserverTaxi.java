@@ -36,24 +36,24 @@ public class ReserverTaxi extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String date = request.getParameter("date");
-		System.out.println("DATE dans ReserverTaxi: "+date);
 		String destination = request.getParameter("destination");
 		int paimentEffectue = Integer.parseInt(request.getParameter("paimentEffectue"));
 		int idClient = Integer.parseInt(request.getParameter("idClient"));
 		int idTaxi = Integer.parseInt(request.getParameter("idTaxi"));
-		
+		System.out.println("DATE dans ReserverTaxi: "+date);
+		System.out.println("DESTINATION dans ReserverTaxi: "+destination);
+		System.out.println("PAIEMENT dans ReserverTaxi: "+paimentEffectue);
+		System.out.println("IDCLIENT dans ReserverTaxi: "+idClient);
+		System.out.println("IDTAXI dans ReserverTaxi: "+idTaxi);
 		GestionTaxi gestionTaxi = new GestionTaxi();
 		try {
 			gestionTaxi.reserverTaxi(idTaxi, date, destination, idClient);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		RequestDispatcher dispat = request.getRequestDispatcher("TrouverTaxijsp.jsp");
+		RequestDispatcher dispat = request.getRequestDispatcher("ConfirmationReservation.jsp");
 		dispat.forward(request, response);
-		
-		
 		
 	}
 

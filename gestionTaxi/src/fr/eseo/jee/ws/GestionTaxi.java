@@ -27,12 +27,14 @@ public class GestionTaxi {
 	public ArrayList<Taxi> trouverTaxi(String ville, String categorie) {
 		ArrayList<Taxi> result = new ArrayList<Taxi>();
 		String request = "SELECT * FROM Taxi WHERE NOT EXISTS (SELECT * FROM Reservation WHERE Taxi.idTaxi=Reservation.idTaxi) AND Taxi.ville="+"'"+ville+"'"+ "and Taxi.categorie="+"'"+categorie+"'";
-		Taxi taxi = new Taxi();
+		//Taxi taxi = new Taxi();
 		try {
 			Statement stat = connexionBDD().createStatement();
+
 			stat.executeQuery(request);
 			ResultSet rset = stat.getResultSet();
 			while(rset.next()) {
+				Taxi taxi = new Taxi();
 				taxi.setIdTaxi(rset.getInt("idTaxi"));
 				taxi.setCategorie(rset.getString("categorie"));
 				taxi.setVille(rset.getString("ville"));
@@ -62,10 +64,12 @@ public class GestionTaxi {
 							+idClient+"','"
 							+idTaxi+"')";
 	
-		
 		Statement stat = connexionBDD().createStatement();
 		stat.executeUpdate(request);
 	}
+	
+	
+	
 }
 
 

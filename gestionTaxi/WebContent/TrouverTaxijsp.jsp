@@ -18,9 +18,10 @@
 		<input type=hidden name=date value=<%=session.getAttribute("date") %>>
 		<input type=hidden name=destination value=<%=session.getAttribute("ville") %>>
 		<input type=hidden name=paimentEffectue value=0>
-		<input type=hidden name=idClient value=3>>
+		<input type=hidden name=idClient value=<%=session.getAttribute("idClient") %>>
 		<input type=hidden name=idTaxi value=<%=taxis.get(i).getIdTaxi()%>>
 		<input type="submit" value="Reserver" name="Reserver"><br/></br>
+
 	</form>
 <%}%>
 </body>
