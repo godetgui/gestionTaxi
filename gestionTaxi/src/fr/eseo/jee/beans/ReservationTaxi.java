@@ -5,7 +5,7 @@ import java.util.Date;
 public class ReservationTaxi {
 	
 	private int idReservation;
-	private Date dateReservation;
+	private String dateReservation;
 	private String destination;
 	private boolean paiementEffectue;
 	
@@ -20,10 +20,10 @@ public class ReservationTaxi {
 	public void setIdReservation(int idReservation) {
 		this.idReservation = idReservation;
 	}
-	public Date getDateReservation() {
+	public String getDateReservation() {
 		return dateReservation;
 	}
-	public void setDateReservation(Date dateReservation) {
+	public void setDateReservation(String dateReservation) {
 		this.dateReservation = dateReservation;
 	}
 	
