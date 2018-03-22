@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="fr.eseo.jee.beans.ReservationTaxi"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -114,6 +117,15 @@
 	<button type="submit" value="reserverMaintenant">Rechercher les taxis disponibles</button>
 	
 	</form>
-
+	<h1>Gerer vos réservations !</h1>
+	
+	<form methode="post" action="Gesti">
+	
+<% %>
+<% ArrayList<ReservationTaxi> listreservations = (ArrayList<ReservationTaxi>)(session.getAttribute("listReservations"));%>
+<% for(int i=0;i<listreservations.size();i++){%>
+	Resa n°<%=listreservations.get(i).getIdReservation()%> : <%=listreservations.get(i).getDestination()%>
+<%}%>
+</form>
 </body>
 </html>
