@@ -48,7 +48,6 @@ public class GestionClient {
 	
 	public void creerNouveauClient(String nom, String prenom, String adresse, String numeroTel) throws SQLException {
 		String request = "INSERT INTO Client VALUES('0','"+ nom+"','"+prenom+"','"+adresse+"','"+numeroTel+"');";
-		//INSERT INTO Client VALUES('0','Jean','Paul','adresse de Paul','1234567890');
 		
 		Statement stat = connexionBDD().createStatement();
 		stat.executeUpdate(request);

@@ -31,15 +31,15 @@
 <nav class="navbar navbar-expand-sm">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/index.jsp">GestionTaxi</a>
+      <a class="navbar-brand" href="index.jsp">GestionTaxi</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a id="menu" href="/index.jsp">Réserver un taxi</a></li>
+      <li><a id="menu" href="index.jsp">Réserver un taxi</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
     	<%-- <c:choose> --%>
     		<%-- <c:when test="${empty sessionScope.client}"> --%>
-					<li><a href="#" id="connexion"><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>	
+					<li><a href="ConnexionDejaClient.jsp" id="connexion"><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>	
 			<%-- </c:when> --%>
 			<%-- <c:otherwise></c:otherwise> --%>
       <%-- </c:choose> --%>

@@ -40,13 +40,20 @@ public class GererNouveauClient extends HttpServlet {
 		
 		GestionClient gestionClient = new GestionClient();
 		try {
-			gestionClient.creerNouveauClient(nom, prenom, adresse, numeroTel);
-			
-			int idClient = gestionClient.trouverClient(nom, prenom).getIdClient();
-			HttpSession session = request.getSession();
-			session.setAttribute("idClient", idClient);
-			RequestDispatcher dispat = request.getRequestDispatcher("accueil.jsp");
-			dispat.forward(request, response);
+			//on vérifier que le client l'existe pas déjà dans la BDD
+			if(!gestionClient.trouverClient(nom, prenom).getNom().isEmpty()){
+				// a améliorer
+				System.out.println("Vous êtes déjà inscrit!");
+			} 
+			else {
+				gestionClient.creerNouveauClient(nom, prenom, adresse, numeroTel);
+				
+				int idClient = gestionClient.trouverClient(nom, prenom).getIdClient();
+				HttpSession session = request.getSession();
+				session.setAttribute("idClient", idClient);
+				RequestDispatcher dispat = request.getRequestDispatcher("accueil.jsp");
+				dispat.forward(request, response);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
