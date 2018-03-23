@@ -14,19 +14,6 @@ body {
   font-size: 14px;
 }
 
-header {
-	text-align: center;
-	font-size: 40px;
-	font-family: Verdana, Arial, Helvetica, sans-serif; 
-}
-
-.navbar {
-	text-align: center;
-	border-color: black;
-	border-radius: 6px;
-	border-width:thin;
-  	line-height: 15px;
-}
 
 footer {
 	text-align: center;
@@ -43,6 +30,7 @@ footer {
   margin-right: auto;
   margin-left: auto;
 }
+
 
 /* ATTRIBUTS DES PANELS PRIMARY */
 
@@ -128,3 +116,4 @@ section {
     font-style: italic;
     color: #E8A22B;
 }
+
