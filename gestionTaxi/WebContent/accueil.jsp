@@ -117,6 +117,7 @@
 	<button type="submit" value="reserverMaintenant">Rechercher les taxis disponibles</button>
 	
 	</form>
+	<%-- 
 	<h1>Gerer vos réservations !</h1>
 	
 	<form methode="post" action="Gesti">
@@ -126,6 +127,7 @@
 <% for(int i=0;i<listreservations.size();i++){%>
 	Resa n°<%=listreservations.get(i).getIdReservation()%> : <%=listreservations.get(i).getDestination()%>
 <%}%>
+--%>
 </form>
 </body>
 </html>
