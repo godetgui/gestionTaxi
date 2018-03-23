@@ -14,8 +14,14 @@
 <label>Voici les taxis de catégorie <%=taxis.get(0).getCategorie()%> disponibles à <%=taxis.get(0).getVille()%> :</label></br></br>
 <% for(int i=0;i<taxis.size();i++){%>
 	Taxi n°<%=i%> : <%=taxis.get(i).getIdTaxi()%>
-	<form method="post" action="Reservation">
-		<input type="submit" value="Réserver" name="Réserver"><br/></br>
+	<form method="post" action="ReserverTaxi">
+		<input type=hidden name=date value=<%=session.getAttribute("date") %>>
+		<input type=hidden name=destination value=<%=session.getAttribute("ville") %>>
+		<input type=hidden name=paimentEffectue value=0>
+		<input type=hidden name=idClient value=<%=session.getAttribute("idClient") %>>
+		<input type=hidden name=idTaxi value=<%=taxis.get(i).getIdTaxi()%>>
+		<input type="submit" value="Reserver" name="Reserver"><br/></br>
+
 	</form>
 <%}%>
 </body>

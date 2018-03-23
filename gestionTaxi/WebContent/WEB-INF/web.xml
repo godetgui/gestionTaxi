@@ -10,6 +10,6 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>RechercherTaxi</servlet-name>
-    <url-pattern>/trouverTaxi</url-pattern>
+    <url-pattern>/service</url-pattern>
   </servlet-mapping>
 </web-app>

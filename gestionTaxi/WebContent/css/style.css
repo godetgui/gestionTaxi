@@ -1,0 +1,130 @@
+/* BALISE PRINCIAPLES */
+
+html {
+  height: 100%;
+}
+
+body {
+  padding-top: 10px;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  position:relative;
+  padding-bottom: 60px;
+  font-size: 14px;
+}
+
+header {
+	text-align: center;
+	font-size: 40px;
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+}
+
+.navbar {
+	text-align: center;
+	border-color: black;
+	border-radius: 6px;
+	border-width:thin;
+  	line-height: 15px;
+}
+
+footer {
+	text-align: center;
+	background-color: lightgray;
+	border-radius: 6px;
+  	line-height: 25px;
+	position: absolute;
+	bottom: 0;
+}
+
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* ATTRIBUTS DES PANELS PRIMARY */
+
+.panel-primary {
+	color:#333;
+    background-color:#fff ;
+    border-color:#337ab7 ;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.panel-primary>.panel-heading{
+	color: #fff;
+    background-color: #337ab7;
+    border-color: #337ab7;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.panel-default>.panel-body{
+    color: #333;
+    background-color: #fff;
+    border-color: #337ab7;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+/* ATTRIBUTS DES PANELS DEFAUT */
+
+.panel-default {
+	color: #333;
+    background-color: #fff;
+    border-color: #ddd;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.panel-default>.panel-heading{
+	color: #333;
+    background-color: #f5f5f5;
+    border-color: #ddd;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.panel-default>.panel-body{
+    color: #333;
+    background-color: #fff;
+    border-color: #337ab7;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+/* ATTRIBUTS DES BOUTONS */
+
+.btn {
+    font-size: 14px;
+    text-align: center;
+    vertical-align: middle;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+section {
+	text-align: justify;
+}
+
+.requis {
+    color: #c00;
+}
+
+.erreur {
+    color: #900;
+}
+
+.succes {
+    color: #090;
+}
+
+.info {
+    font-style: italic;
+    color: #E8A22B;
+}
