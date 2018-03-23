@@ -1,3 +1,4 @@
+
 <%@page import="java.util.ArrayList"%>
 <%@page import="fr.eseo.jee.beans.ReservationTaxi"%>
 
@@ -124,7 +125,6 @@
 <% for(int i=0;i<listreservations.size();i++){%>
 	Resa n°<%=listreservations.get(i).getIdReservation()%> : <%=listreservations.get(i).getDestination()%>
 <%}%>
-	
-	
+</form>
 </body>
 </html>
