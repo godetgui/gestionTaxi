@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import fr.eseo.jee.bdd.GestionClient;
 import fr.eseo.jee.bdd.GestionReservation;
+import fr.eseo.jee.beans.Client;
 import fr.eseo.jee.beans.ReservationTaxi;
 
 /**
@@ -41,18 +42,24 @@ public class GererDejaClient extends HttpServlet {
 		
 		//On envoie l'idClient dans la session
 		GestionClient gestionClient = new GestionClient();
-		int idClient = gestionClient.trouverClient(nom, prenom).getIdClient();
-		System.out.println("Dans GererDejaClient: id du client: "+idClient);
-		HttpSession session = request.getSession();
-		session.setAttribute("idClient", idClient);
-		
-		//On recupere les reservations assosciées à cet idClient
-		GestionReservation gestionReservation = new GestionReservation();
-		ArrayList<ReservationTaxi> listReservations = gestionReservation.trouverReservation( (Integer) session.getAttribute("idClient"));
-		session.setAttribute("listReservations", listReservations);
-		
-		RequestDispatcher dispat = request.getRequestDispatcher("accueil.jsp");
-		dispat.forward(request, response);
+		Client client = gestionClient.trouverClient(nom, prenom);
+		if(client.getNom() == null){
+			//améliorer affichage erreur
+			System.out.println("Le client n'existe pas dans la base de données");
+		}
+		else {
+			int idClient = gestionClient.trouverClient(nom, prenom).getIdClient();
+			System.out.println("Dans GererDejaClient: id du client: "+idClient);
+			HttpSession session = request.getSession();
+			session.setAttribute("idClient", idClient);
+			//On recupere les reservations assosciées à cet idClient
+			GestionReservation gestionReservation = new GestionReservation();
+			ArrayList<ReservationTaxi> listReservations = gestionReservation.trouverReservation( (Integer) session.getAttribute("idClient"));
+			session.setAttribute("listReservations", listReservations);
+			
+			RequestDispatcher dispat = request.getRequestDispatcher("accueil.jsp");
+			dispat.forward(request, response);
+		}
 	}
 	
 
