@@ -2,6 +2,7 @@ package fr.eseo.jee.servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.eseo.jee.bdd.GestionClient;
+import fr.eseo.jee.bdd.GestionReservation;
+import fr.eseo.jee.beans.ReservationTaxi;
 
 /**
  * Servlet implementation class GererDejaClient
@@ -36,11 +39,18 @@ public class GererDejaClient extends HttpServlet {
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
 		
+		//On envoie l'idClient dans la session
 		GestionClient gestionClient = new GestionClient();
 		int idClient = gestionClient.trouverClient(nom, prenom).getIdClient();
 		System.out.println("Dans GererDejaClient: id du client: "+idClient);
 		HttpSession session = request.getSession();
 		session.setAttribute("idClient", idClient);
+		
+		//On recupere les reservations assosciées à cet idClient
+		GestionReservation gestionReservation = new GestionReservation();
+		ArrayList<ReservationTaxi> listReservations = gestionReservation.trouverReservation( (Integer) session.getAttribute("idClient"));
+		session.setAttribute("listReservations", listReservations);
+		
 		RequestDispatcher dispat = request.getRequestDispatcher("accueil.jsp");
 		dispat.forward(request, response);
 	}

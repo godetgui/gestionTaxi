@@ -33,6 +33,7 @@ public class GererReservation extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Dans GERER_RESERVATION");
 		GestionReservation gestionReservation = new GestionReservation();
 		HttpSession session = request.getSession();
 		ArrayList<ReservationTaxi> listReservations = gestionReservation.trouverReservation( (Integer) session.getAttribute("idClient"));

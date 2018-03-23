@@ -40,10 +40,10 @@ public class RechercherTaxi extends HttpServlet {
 		System.out.println("DATE dans RechercherTaxi: "+date);
 		String categorie = request.getParameter("categorie");
 		GestionTaxi gestionTaxi = new GestionTaxi();
-		ArrayList<Taxi> taxis = gestionTaxi.trouverTaxi(ville,categorie);
-		for(int i=0;i<taxis.size();i++) {
-			System.out.println("taxis from servlet="+taxis.get(i).getIdTaxi());
-		}
+		ArrayList<Taxi> taxis = gestionTaxi.trouverTaxi(new Taxi(categorie, ville));
+//		for(int i=0;i<taxis.size();i++) {
+//			System.out.println("taxis from servlet="+taxis.get(i).getIdTaxi());
+//		}
 		HttpSession session = request.getSession();
 		session.setAttribute("taxis", taxis);
 		session.setAttribute("date", date);

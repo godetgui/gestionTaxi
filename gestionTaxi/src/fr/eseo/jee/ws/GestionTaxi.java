@@ -8,11 +8,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.jws.WebService;
+
 import fr.eseo.jee.beans.Client;
 import fr.eseo.jee.beans.ReservationTaxi;
 import fr.eseo.jee.beans.Taxi;
 
-public class GestionTaxi {
+@WebService(targetNamespace = "http://ws.jee.eseo.fr/", endpointInterface = "fr.eseo.jee.ws.GestionTaxiSEI", portName = "GestionTaxiPort", serviceName = "GestionTaxiService")
+public class GestionTaxi implements GestionTaxiSEI {
 	
 	
 	public Connection connexionBDD() throws SQLException {
@@ -24,22 +27,56 @@ public class GestionTaxi {
 		
 	
 	
-	public ArrayList<Taxi> trouverTaxi(String ville, String categorie) {
+	public ArrayList<Taxi> trouverTaxi(Taxi taxi) {
+		String ville = taxi.getVille();
+		String categorie = taxi.getCategorie();
+		String tarifDeBase = taxi.getTarifDeBase();
 		ArrayList<Taxi> result = new ArrayList<Taxi>();
-		String request = "SELECT * FROM Taxi WHERE NOT EXISTS (SELECT * FROM Reservation WHERE Taxi.idTaxi=Reservation.idTaxi) AND Taxi.ville="+"'"+ville+"'"+ "and Taxi.categorie="+"'"+categorie+"'";
+		
+		String requestCategorie = "SELECT * FROM Taxi WHERE NOT EXISTS (SELECT * FROM Reservation WHERE Taxi.idTaxi=Reservation.idTaxi) AND Taxi.categorie="+"'"+categorie+"'";
+		String requestCategorieTarif = "SELECT * FROM Taxi WHERE NOT EXISTS (SELECT * FROM Reservation WHERE Taxi.idTaxi=Reservation.idTaxi) "
+										+ "AND Taxi.categorie="+"'"+categorie+"' and Taxi.tarifDeBase="+"'"+tarifDeBase+"'";
+		String requestVille = "SELECT * FROM Taxi WHERE NOT EXISTS (SELECT * FROM Reservation WHERE Taxi.idTaxi=Reservation.idTaxi) "
+				+ "AND Taxi.ville="+"'"+ville+"'";
+		String requestVilleTarif = "SELECT * FROM Taxi WHERE NOT EXISTS (SELECT * FROM Reservation WHERE Taxi.idTaxi=Reservation.idTaxi) "
+				+ "AND Taxi.ville="+"'"+ville+"' and Taxi.tarifDeBase="+"'"+tarifDeBase+"'";
+		String requestVilleCategorie = "SELECT * FROM Taxi WHERE NOT EXISTS (SELECT * FROM Reservation WHERE Taxi.idTaxi=Reservation.idTaxi) "
+				+ "AND Taxi.ville="+"'"+ville+"' and Taxi.categorie="+"'"+categorie+"'";
+		String requestVilleTarifCategorie = "SELECT * FROM Taxi WHERE NOT EXISTS (SELECT * FROM Reservation WHERE Taxi.idTaxi=Reservation.idTaxi) "
+				+ "AND Taxi.ville="+"'"+categorie+"' and Taxi.tarifDeBase="+"'"+tarifDeBase+"' and Taxi.ville="+"'"+categorie+"'";
+		
 		//Taxi taxi = new Taxi();
 		try {
 			Statement stat = connexionBDD().createStatement();
+			if(ville==null && tarifDeBase==null) {
+				stat.executeQuery(requestCategorie);
+			}
+			if(ville==null) {
+				stat.executeQuery(requestCategorieTarif);
+			}
+			if(categorie==null && tarifDeBase==null) {
+				stat.executeQuery(requestVille);
+			}
+			if(categorie==null && ville!=null &&tarifDeBase!=null ) {
+				stat.executeQuery(requestVilleTarif);
+			}
+			if(tarifDeBase==null) {
+				stat.executeQuery(requestVilleCategorie);
+			}
+			if(tarifDeBase!=null && categorie!=null && ville!=null) {
+				stat.executeQuery(requestVilleTarifCategorie);
+			}
+			
 
-			stat.executeQuery(request);
+			
 			ResultSet rset = stat.getResultSet();
 			while(rset.next()) {
-				Taxi taxi = new Taxi();
-				taxi.setIdTaxi(rset.getInt("idTaxi"));
-				taxi.setCategorie(rset.getString("categorie"));
-				taxi.setVille(rset.getString("ville"));
-				taxi.setTarifDeBase(rset.getString("tarifDeBase"));
-				result.add(taxi);
+				Taxi taxiTrouve = new Taxi();
+				taxiTrouve.setIdTaxi(rset.getInt("idTaxi"));
+				taxiTrouve.setCategorie(rset.getString("categorie"));
+				taxiTrouve.setVille(rset.getString("ville"));
+				taxiTrouve.setTarifDeBase(rset.getString("tarifDeBase"));
+				result.add(taxiTrouve);
 			}
 			for(int i=0;i<result.size();i++) {
 				System.out.println("taxis="+result.get(i).getIdTaxi());
@@ -67,6 +104,7 @@ public class GestionTaxi {
 		Statement stat = connexionBDD().createStatement();
 		stat.executeUpdate(request);
 	}
+
 	
 	
 	
