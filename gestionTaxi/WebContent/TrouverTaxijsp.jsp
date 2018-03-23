@@ -21,7 +21,6 @@
 		<input type=hidden name=idClient value=<%=session.getAttribute("idClient") %>>
 		<input type=hidden name=idTaxi value=<%=taxis.get(i).getIdTaxi()%>>
 		<input type="submit" value="Reserver" name="Reserver"><br/></br>
-
 	</form>
 <%}%>
 </body>

@@ -35,15 +35,15 @@ public class RechercherTaxi extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String ville = request.getParameter("ville");
-		String date = request.getParameter("annee")+"-"+request.getParameter("mois")+"-"+request.getParameter("jour")+" "+request.getParameter("heure")+":"+request.getParameter("minute")+":00";
+		String date = request.getParameter("annee")+"-"+request.getParameter("mois")+"-"+request.getParameter("jour")+"/"+request.getParameter("heure")+":"+request.getParameter("minute")+":00";
 		//"2018-03-16 14:20:00"
 		System.out.println("DATE dans RechercherTaxi: "+date);
 		String categorie = request.getParameter("categorie");
 		GestionTaxi gestionTaxi = new GestionTaxi();
-		ArrayList<Taxi> taxis = gestionTaxi.trouverTaxi(ville,categorie);
-		for(int i=0;i<taxis.size();i++) {
-			System.out.println("taxis from servlet="+taxis.get(i).getIdTaxi());
-		}
+		ArrayList<Taxi> taxis = gestionTaxi.trouverTaxi(new Taxi(categorie, ville));
+//		for(int i=0;i<taxis.size();i++) {
+//			System.out.println("taxis from servlet="+taxis.get(i).getIdTaxi());
+//		}
 		HttpSession session = request.getSession();
 		session.setAttribute("taxis", taxis);
 		session.setAttribute("date", date);

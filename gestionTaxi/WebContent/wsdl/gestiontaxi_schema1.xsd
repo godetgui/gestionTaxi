@@ -1,0 +1,44 @@
+<xs:schema xmlns:tns="http://ws.jee.eseo.fr/" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://ws.jee.eseo.fr/">
+  <xs:element name="reserverTaxi" type="tns:reserverTaxi"/>
+  <xs:element name="reserverTaxiResponse" type="tns:reserverTaxiResponse"/>
+  <xs:element name="trouverTaxi" type="tns:trouverTaxi"/>
+  <xs:element name="trouverTaxiResponse" type="tns:trouverTaxiResponse"/>
+  <xs:complexType name="reserverTaxi">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:int"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+      <xs:element name="arg3" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="reserverTaxiResponse">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="trouverTaxi">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="trouverTaxiResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:taxi"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="taxi">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="categorie" type="xs:string"/>
+      <xs:element name="idTaxi" type="xs:int"/>
+      <xs:element minOccurs="0" name="tarifDeBase" type="xs:string"/>
+      <xs:element minOccurs="0" name="ville" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SQLException" type="tns:SQLException"/>
+  <xs:complexType name="SQLException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+      <xs:element minOccurs="0" name="sQLState" type="xs:string"/>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

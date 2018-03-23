@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="GestionTaxiService" targetNamespace="http://ws.jee.eseo.fr/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://ws.jee.eseo.fr/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema">
+  <import namespace="http://ws.jee.eseo.fr/" schemaLocation="gestiontaxi_schema1.xsd"/>
+</schema>
+  </wsdl:types>
+  <wsdl:message name="SQLException">
+    <wsdl:part name="SQLException" element="tns:SQLException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="trouverTaxiResponse">
+    <wsdl:part name="parameters" element="tns:trouverTaxiResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="reserverTaxi">
+    <wsdl:part name="parameters" element="tns:reserverTaxi">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="trouverTaxi">
+    <wsdl:part name="parameters" element="tns:trouverTaxi">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="reserverTaxiResponse">
+    <wsdl:part name="parameters" element="tns:reserverTaxiResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="GestionTaxiSEI">
+    <wsdl:operation name="reserverTaxi">
+      <wsdl:input name="reserverTaxi" message="tns:reserverTaxi">
+    </wsdl:input>
+      <wsdl:output name="reserverTaxiResponse" message="tns:reserverTaxiResponse">
+    </wsdl:output>
+      <wsdl:fault name="SQLException" message="tns:SQLException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="trouverTaxi">
+      <wsdl:input name="trouverTaxi" message="tns:trouverTaxi">
+    </wsdl:input>
+      <wsdl:output name="trouverTaxiResponse" message="tns:trouverTaxiResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GestionTaxiServiceSoapBinding" type="tns:GestionTaxiSEI">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="reserverTaxi">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="reserverTaxi">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="reserverTaxiResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="SQLException">
+        <soap:fault name="SQLException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="trouverTaxi">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="trouverTaxi">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="trouverTaxiResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GestionTaxiService">
+    <wsdl:port name="GestionTaxiPort" binding="tns:GestionTaxiServiceSoapBinding">
+      <soap:address location="http://localhost:8080/gestionTaxi/services/GestionTaxiPort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

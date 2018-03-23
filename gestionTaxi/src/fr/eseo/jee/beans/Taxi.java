@@ -14,6 +14,11 @@ public class Taxi {
 	public Taxi() {
 		super();
 	}
+	
+	public Taxi(String categorie, String ville) {
+		this.categorie=categorie;
+		this.ville=ville;
+	}
 
 	public int getIdTaxi() {
 		return idTaxi;

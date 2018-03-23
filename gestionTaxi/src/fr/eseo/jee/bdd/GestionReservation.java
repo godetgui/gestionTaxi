@@ -11,6 +11,10 @@ import fr.eseo.jee.beans.Client;
 import fr.eseo.jee.beans.ReservationTaxi;
 
 public class GestionReservation {
+	
+	public GestionReservation() {
+		super();
+	}
 
 	public Connection connexionBDD() throws SQLException {
 		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
@@ -20,9 +24,10 @@ public class GestionReservation {
 	}
 	
 	public ArrayList<ReservationTaxi> trouverReservation(int idClient) {
+		System.out.println("DANS GESTION_RESERVATION");
 
 		//String idClient = "SELECT idClient FROM CLIENT WHERE  nom="+"'"+nom+"'"+ "and prenom="+"'"+prenom+"'";
-		String reservations = "SELECT * FROM Reservation WHERE Client.idClient="+"'"+idClient+"' AND Client.idClient=Reservation.idReservation;";
+		String reservations = "SELECT * FROM Reservation WHERE Reservation.idClient="+"'"+idClient+"'";
 		
 		ArrayList<ReservationTaxi> listReservations = new ArrayList<ReservationTaxi>();
 		try {
