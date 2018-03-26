@@ -104,6 +104,12 @@ public class GestionTaxi implements GestionTaxiSEI {
 		Statement stat = connexionBDD().createStatement();
 		stat.executeUpdate(request);
 	}
+	
+	public void annulerTaxi() throws SQLException {
+	}
+	
+	public void payerTaxi() throws SQLException {
+	}
 
 	
 	

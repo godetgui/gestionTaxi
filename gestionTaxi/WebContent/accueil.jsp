@@ -1,4 +1,3 @@
-
 <%@page import="java.util.ArrayList"%>
 <%@page import="fr.eseo.jee.beans.ReservationTaxi"%>
 
@@ -7,8 +6,12 @@
 
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Bienvenue sur Gestion Taxi !</title>
+<link rel="stylesheet" href="Style.css">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Bienvenue sur Gestion Taxi !</title>
+	<link rel="stylesheet" href='<c:url value="/css/bootstrap.min.css"/>'>
+	<link rel="stylesheet" href='<c:url value="/css/style.css"/>'>
+
 </head>
 <body>
 	<h1>Commandez votre taxi !</h1>
@@ -119,13 +122,34 @@
 	
 	</form>
 	<h1>Gerer vos réservations !</h1>
+	<table>
+   <tr>
+       <td>Resa n°</td>
+       <td>Date</td>
+       <td>Ville</td>
+       <td>Destination</td>
+       <td>Payement</td> 
+       <td>Payer</td> 
+       <td>Annuler</td> 
+            
+   </tr>
+  
 	
-<!-- 	<form methode="post" action="GererReservation"></form> -->
-<% ArrayList<ReservationTaxi> listreservations = (ArrayList<ReservationTaxi>)(session.getAttribute("listReservations"));%>
+<!-- 	< -->
+ <tr>
+ <% ArrayList<ReservationTaxi> listreservations = (ArrayList<ReservationTaxi>)(session.getAttribute("listReservations"));%>
 <% for(int i=0;i<listreservations.size();i++){%>
-	Resa n°<%=listreservations.get(i).getIdReservation()%> : <%=listreservations.get(i).getDestination()%>
-<%}%>
+       <td><%=listreservations.get(i).getIdReservation()%></td>
+       <td><%=listreservations.get(i).getDateReservation()%></td>
+       <td><%=listreservations.get(i).getDestination()%></td>
+       <td><%=listreservations.get(i).isPaiementEffectue()%></td>
+		<td ><input type="button" value="Payer"> <form methode="post" action="PayerReservation"></form></td>
+		<td ><input type="button" value="Annuler"> <form methode="post" action="AnnulerReservation"></form></td>
 
-</form>
+ </tr>
+ <%}%>
+
+</table>
+	
 </body>
 </html>
