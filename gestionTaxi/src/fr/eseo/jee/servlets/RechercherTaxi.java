@@ -36,17 +36,16 @@ public class RechercherTaxi extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String ville = request.getParameter("ville");
 		String date = request.getParameter("annee")+"-"+request.getParameter("mois")+"-"+request.getParameter("jour")+"/"+request.getParameter("heure")+":"+request.getParameter("minute")+":00";
-		//"2018-03-16 14:20:00"
-		System.out.println("DATE dans RechercherTaxi: "+date);
+		//"2018-03-16/14:20:00"
 		String categorie = request.getParameter("categorie");
+		String destination = request.getParameter("destination");
+		System.out.println("DESTINATIOOOOOOOOON: "+destination);
 		GestionTaxi gestionTaxi = new GestionTaxi();
 		ArrayList<Taxi> taxis = gestionTaxi.trouverTaxi(new Taxi(categorie, ville));
-//		for(int i=0;i<taxis.size();i++) {
-//			System.out.println("taxis from servlet="+taxis.get(i).getIdTaxi());
-//		}
 		HttpSession session = request.getSession();
 		session.setAttribute("taxis", taxis);
 		session.setAttribute("date", date);
+		session.setAttribute("destination", destination);
 		session.setAttribute("ville", ville);
 		RequestDispatcher dispat = request.getRequestDispatcher("TrouverTaxijsp.jsp");
 		dispat.forward(request, response);

@@ -24,50 +24,38 @@ public class GestionTaxi implements GestionTaxiSEI {
 		return connect;
 		
 	}
-		
-	
 	
 	public ArrayList<Taxi> trouverTaxi(Taxi taxi) {
 		String ville = taxi.getVille();
 		String categorie = taxi.getCategorie();
-		String tarifDeBase = taxi.getTarifDeBase();
 		ArrayList<Taxi> result = new ArrayList<Taxi>();
 		
 		String requestCategorie = "SELECT * FROM Taxi WHERE NOT EXISTS (SELECT * FROM Reservation WHERE Taxi.idTaxi=Reservation.idTaxi) AND Taxi.categorie="+"'"+categorie+"'";
-		String requestCategorieTarif = "SELECT * FROM Taxi WHERE NOT EXISTS (SELECT * FROM Reservation WHERE Taxi.idTaxi=Reservation.idTaxi) "
-										+ "AND Taxi.categorie="+"'"+categorie+"' and Taxi.tarifDeBase="+"'"+tarifDeBase+"'";
-		String requestVille = "SELECT * FROM Taxi WHERE NOT EXISTS (SELECT * FROM Reservation WHERE Taxi.idTaxi=Reservation.idTaxi) "
-				+ "AND Taxi.ville="+"'"+ville+"'";
-		String requestVilleTarif = "SELECT * FROM Taxi WHERE NOT EXISTS (SELECT * FROM Reservation WHERE Taxi.idTaxi=Reservation.idTaxi) "
-				+ "AND Taxi.ville="+"'"+ville+"' and Taxi.tarifDeBase="+"'"+tarifDeBase+"'";
+		String requestVille = "SELECT * FROM Taxi WHERE NOT EXISTS (SELECT * FROM Reservation WHERE Taxi.idTaxi=Reservation.idTaxi) AND Taxi.ville="+"'"+ville+"'";
 		String requestVilleCategorie = "SELECT * FROM Taxi WHERE NOT EXISTS (SELECT * FROM Reservation WHERE Taxi.idTaxi=Reservation.idTaxi) "
 				+ "AND Taxi.ville="+"'"+ville+"' and Taxi.categorie="+"'"+categorie+"'";
-		String requestVilleTarifCategorie = "SELECT * FROM Taxi WHERE NOT EXISTS (SELECT * FROM Reservation WHERE Taxi.idTaxi=Reservation.idTaxi) "
-				+ "AND Taxi.ville="+"'"+categorie+"' and Taxi.tarifDeBase="+"'"+tarifDeBase+"' and Taxi.ville="+"'"+categorie+"'";
+		String request = "SELECT * FROM Taxi WHERE NOT EXISTS (SELECT * FROM Reservation WHERE Taxi.idTaxi=Reservation.idTaxi)";
 		
 		//Taxi taxi = new Taxi();
+		System.out.println("Ville: "+ville);
+		System.out.println("Categorie: "+categorie);
 		try {
 			Statement stat = connexionBDD().createStatement();
-			if(ville==null && tarifDeBase==null) {
-				stat.executeQuery(requestCategorie);
+			if(ville.equals("null") && !categorie.equals("null")) {
+				stat.executeQuery(requestCategorie); //OK
+				System.out.println("RequeteCategorie effecuée");
 			}
-			if(ville==null) {
-				stat.executeQuery(requestCategorieTarif);
+			if(categorie.equals("null") && !ville.equals("null")) {
+				stat.executeQuery(requestVille); //OK
+				System.out.println("RequeteVille effecuée");
 			}
-			if(categorie==null && tarifDeBase==null) {
-				stat.executeQuery(requestVille);
+			if(ville.equals("null") && categorie.equals("null")) {
+				stat.executeQuery(request); //OK
 			}
-			if(categorie==null && ville!=null &&tarifDeBase!=null ) {
-				stat.executeQuery(requestVilleTarif);
+			if(!categorie.equals("null") && !ville.equals("null")) {
+				stat.executeQuery(requestVilleCategorie); //OK
+				System.out.println("RequeteVilleCategorie effecuée");	
 			}
-			if(tarifDeBase==null) {
-				stat.executeQuery(requestVilleCategorie);
-			}
-			if(tarifDeBase!=null && categorie!=null && ville!=null) {
-				stat.executeQuery(requestVilleTarifCategorie);
-			}
-			
-
 			
 			ResultSet rset = stat.getResultSet();
 			while(rset.next()) {
@@ -91,24 +79,32 @@ public class GestionTaxi implements GestionTaxiSEI {
 	}
 	
 	
-	public void reserverTaxi(int idTaxi, String date, String destination, int idClient) throws SQLException {
-		int paiementEffectue = 0;
+	public void reserverTaxi(ReservationTaxi reservation) throws SQLException {
+		//int idTaxi, String date, String destination, int idClient
+		String date = reservation.getDateReservation();
+		String ville = reservation.getVille();
+		String destination = reservation.getDestination();
+		int paiementEffectue;
+		if(reservation.isPaiementEffectue()==false) {
+			paiementEffectue = 0;
+		}
+		else {
+			paiementEffectue = 1;
+		}
+		int idClient = reservation.getIdClient();
+		int idTaxi = reservation.getIdTaxi();
+		
 		
 		String request = "INSERT INTO Reservation VALUES ('0','"
-							+date+"','"
-							+destination+"','"
-							+paiementEffectue+"','"
-							+idClient+"','"
-							+idTaxi+"')";
+				+date+"','"
+                +ville+"','"
+				+destination+"','"
+				+paiementEffectue+"','"
+				+idClient+"','"
+				+idTaxi+"')";
 	
 		Statement stat = connexionBDD().createStatement();
 		stat.executeUpdate(request);
-	}
-	
-	public void annulerTaxi() throws SQLException {
-	}
-	
-	public void payerTaxi() throws SQLException {
 	}
 
 	

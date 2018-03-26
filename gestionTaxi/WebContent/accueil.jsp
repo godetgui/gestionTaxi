@@ -6,12 +6,8 @@
 
 <html>
 <head>
-<link rel="stylesheet" href="Style.css">
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Bienvenue sur Gestion Taxi !</title>
-	<link rel="stylesheet" href='<c:url value="/css/bootstrap.min.css"/>'>
-	<link rel="stylesheet" href='<c:url value="/css/style.css"/>'>
-
+<meta charset="UTF-8">
+<title>Bienvenue sur Gestion Taxi !</title>
 </head>
 <body>
 	<h1>Commandez votre taxi !</h1>
@@ -19,11 +15,16 @@
 	<form methode="post" action="RechercherTaxi">
 	<label>Ville : </label>
 	<%java.util.ArrayList<String> villes = fr.eseo.jee.bdd.GestionTable.getVille();%>
-	<select name="ville">
+	<select name="ville" id="ville">
+	<option value=null>Indifférent</option>
 	<%for(int i=0;i<villes.size();i++) {%>
 		<option><%=villes.get(i)%></option>
 	<%}%>
 	</select>
+	</br>
+	</br>
+	<label>Destination : </label>
+	<input type=text name=destination id=destination/> 
 	</br>
 	</br>
 	Date : <label> Année </label><select name="annee" id="annee">
@@ -113,8 +114,9 @@
 	</br>
 	<label>Catégorie</label>
 		<select name="categorie" id="categorie">
+		<option value=null>Indifférent</option>
 		<option>Touktouk 
-		<option>Citadine 
+		<option>Citadine
 		<option>Minibus 
 		<option>Limousine 
 		</select></br></br>
@@ -141,6 +143,7 @@
 <% for(int i=0;i<listreservations.size();i++){%>
        <td><%=listreservations.get(i).getIdReservation()%></td>
        <td><%=listreservations.get(i).getDateReservation()%></td>
+       <td><%=listreservations.get(i).getVille()%></td>
        <td><%=listreservations.get(i).getDestination()%></td>
        <td><%=listreservations.get(i).isPaiementEffectue()%></td>
 		<td ><input type="button" value="Payer"> <form methode="post" action="PayerReservation"></form></td>

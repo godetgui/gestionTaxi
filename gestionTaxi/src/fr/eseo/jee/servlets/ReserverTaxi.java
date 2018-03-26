@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eseo.jee.beans.ReservationTaxi;
 import fr.eseo.jee.ws.GestionTaxi;
 
 /**
@@ -29,6 +30,8 @@ public class ReserverTaxi extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    boolean booleanPaiementEffectue;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -37,6 +40,7 @@ public class ReserverTaxi extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String date = request.getParameter("date");
 		String destination = request.getParameter("destination");
+		String ville = request.getParameter("ville");
 		int paimentEffectue = Integer.parseInt(request.getParameter("paimentEffectue"));
 		int idClient = Integer.parseInt(request.getParameter("idClient"));
 		int idTaxi = Integer.parseInt(request.getParameter("idTaxi"));
@@ -47,7 +51,14 @@ public class ReserverTaxi extends HttpServlet {
 		System.out.println("IDTAXI dans ReserverTaxi: "+idTaxi);
 		GestionTaxi gestionTaxi = new GestionTaxi();
 		try {
-			gestionTaxi.reserverTaxi(idTaxi, date, destination, idClient);
+			if(paimentEffectue==0) {
+				booleanPaiementEffectue = false;
+			}
+			else {
+				booleanPaiementEffectue = true;
+			}
+			
+			gestionTaxi.reserverTaxi(new ReservationTaxi(date, ville, destination, booleanPaiementEffectue, idTaxi, idClient));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

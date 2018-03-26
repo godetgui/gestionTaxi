@@ -6,17 +6,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Resultat de la recherche de taxis</title>
+<title>Resultat de la recherche de taxis</title> 
 </head>
 <body>
 <% %>
 <% ArrayList<Taxi> taxis = (ArrayList<Taxi>)(session.getAttribute("taxis"));%>
-<label>Voici les taxis de catégorie <%=taxis.get(0).getCategorie()%> disponibles à <%=taxis.get(0).getVille()%> :</label></br></br>
+<%-- <label>Voici les taxis de catégorie <%=taxis.get(0).getCategorie()%> disponibles à <%=taxis.get(0).getVille()%> :</label></br></br> --%>
 <% for(int i=0;i<taxis.size();i++){%>
 	Taxi n°<%=i%> : <%=taxis.get(i).getIdTaxi()%>
 	<form method="post" action="ReserverTaxi">
 		<input type=hidden name=date value=<%=session.getAttribute("date") %>>
-		<input type=hidden name=destination value=<%=session.getAttribute("ville") %>>
+		<input type=hidden name=destination value=<%=session.getAttribute("destination") %>>
+		<input type=hidden name=ville value=<%=session.getAttribute("ville") %>>
 		<input type=hidden name=paimentEffectue value=0>
 		<input type=hidden name=idClient value=<%=session.getAttribute("idClient") %>>
 		<input type=hidden name=idTaxi value=<%=taxis.get(i).getIdTaxi()%>>

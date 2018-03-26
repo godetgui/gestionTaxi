@@ -39,7 +39,9 @@ public class GestionReservation {
 				ReservationTaxi reservation = new ReservationTaxi();
 				reservation.setIdReservation(Integer.parseInt(rset.getString("idReservation")));
 				reservation.setDateReservation(rset.getString("dateReservation"));
-				reservation.setDestination("destination");
+				reservation.setDestination(rset.getString("destination"));
+				reservation.setVille(rset.getString("ville"));
+				
 				reservation.setPaiementEffectue(false);
 				listReservations.add(reservation);
 			}
