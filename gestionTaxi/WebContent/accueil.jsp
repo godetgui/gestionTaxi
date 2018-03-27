@@ -146,9 +146,17 @@
        <td><%=listreservations.get(i).getVille()%></td>
        <td><%=listreservations.get(i).getDestination()%></td>
        <td><%=listreservations.get(i).isPaiementEffectue()%></td>
-		<td ><input type="button" value="Payer"> <form methode="post" action="PayerReservation"></form></td>
-		<td ><input type="button" value="Annuler"> <form methode="post" action="AnnulerReservation"></form></td>
-
+		<td ><input type="submit" value="Payer"> <form methode="post" action="PayerReservation"></form></td>
+		
+		
+		<td><form methode="post" action="AnnulerReservation">
+		<input type="submit" value="Annuler"> 
+		<input type=hidden name=idReservation id=idReservation value=<%=listreservations.get(i).getIdReservation()%>/>
+		<input type=hidden name=dateReservation id=dateReservation value=<%=listreservations.get(i).getDateReservation()%>/>
+		<input type=hidden name=ville id=ville value=<%=listreservations.get(i).getVille()%>/>
+		<input type=hidden name=destination id=destination value=<%=listreservations.get(i).getDestination()%>/>
+		<input type=hidden name=paiement id=paiement value=<%=listreservations.get(i).isPaiementEffectue()%>/>
+		</form></td>
  </tr>
  <%}%>
 

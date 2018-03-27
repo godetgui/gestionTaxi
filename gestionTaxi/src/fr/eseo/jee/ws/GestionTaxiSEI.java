@@ -13,6 +13,6 @@ public interface GestionTaxiSEI {
 
 	ArrayList<Taxi> trouverTaxi(Taxi taxi);
 
-	void reserverTaxi(ReservationTaxi reservation) throws SQLException;
+	int reserverTaxi(ReservationTaxi reservation) throws SQLException;
 
 }

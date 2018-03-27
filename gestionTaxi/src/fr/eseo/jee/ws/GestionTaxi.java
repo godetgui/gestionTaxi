@@ -79,7 +79,7 @@ public class GestionTaxi implements GestionTaxiSEI {
 	}
 	
 	
-	public void reserverTaxi(ReservationTaxi reservation) throws SQLException {
+	public int reserverTaxi(ReservationTaxi reservation) throws SQLException {
 		//int idTaxi, String date, String destination, int idClient
 		String date = reservation.getDateReservation();
 		String ville = reservation.getVille();
@@ -95,19 +95,48 @@ public class GestionTaxi implements GestionTaxiSEI {
 		int idTaxi = reservation.getIdTaxi();
 		
 		
-		String request = "INSERT INTO Reservation VALUES ('0','"
+		String requestInsert = "INSERT INTO Reservation VALUES ('0','"
 				+date+"','"
                 +ville+"','"
 				+destination+"','"
 				+paiementEffectue+"','"
 				+idClient+"','"
 				+idTaxi+"')";
+		
+		String requestIdReservation = "SELECT idReservation FROM Reservation WHERE Reservation.idClient="+idClient
+				+" and Reservation.idTaxi="+idTaxi
+				+" and Reservation.booleenPaiementEffectue="+paiementEffectue
+				+" and Reservation.destination="+destination
+				+" and Reservation.ville="+ville;
+				
 	
-		Statement stat = connexionBDD().createStatement();
-		stat.executeUpdate(request);
+		Statement stat1 = connexionBDD().createStatement();
+		Statement stat2 = connexionBDD().createStatement();
+		stat1.executeUpdate(requestInsert);
+		stat2.executeQuery(requestIdReservation);
+		System.out.println("ID DE RESERVATION: "+Integer.parseInt(stat2.getResultSet().getString("idReservation")));
+		return Integer.parseInt(stat2.getResultSet().getString("idReservation"));
 	}
 
-	
+	public boolean annulerTaxi(int idReservation) throws SQLException {
+		boolean annuler=false;
+		
+		String requeteAnnuler = "DELETE * FROM Reservation WHERE Reservation.idReservation="+idReservation;
+		String requeteVerification = "DELETE * FROM Reservation WHERE Reservation.idReservation="+idReservation;
+		
+		Statement stat1 = connexionBDD().createStatement();
+		Statement stat2 = connexionBDD().createStatement();
+		stat1.executeQuery(requeteAnnuler);
+		stat2.executeQuery(requeteVerification);
+		
+		if(requeteVerification == null) {
+			annuler = true;
+		}
+		else{
+			annuler = false;
+		}
+		return annuler;
+	}
 	
 	
 }
