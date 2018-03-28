@@ -28,33 +28,43 @@ public class GestionTaxi implements GestionTaxiSEI {
 	public ArrayList<Taxi> trouverTaxi(Taxi taxi) {
 		String ville = taxi.getVille();
 		String categorie = taxi.getCategorie();
+		Float tarif = taxi.getTarifDeBase();
+		int idTaxi = taxi.getIdTaxi();
+		
+		
 		ArrayList<Taxi> result = new ArrayList<Taxi>();
 		
-		String requestCategorie = "SELECT * FROM Taxi WHERE NOT EXISTS (SELECT * FROM Reservation WHERE Taxi.idTaxi=Reservation.idTaxi) AND Taxi.categorie="+"'"+categorie+"'";
-		String requestVille = "SELECT * FROM Taxi WHERE NOT EXISTS (SELECT * FROM Reservation WHERE Taxi.idTaxi=Reservation.idTaxi) AND Taxi.ville="+"'"+ville+"'";
-		String requestVilleCategorie = "SELECT * FROM Taxi WHERE NOT EXISTS (SELECT * FROM Reservation WHERE Taxi.idTaxi=Reservation.idTaxi) "
-				+ "AND Taxi.ville="+"'"+ville+"' and Taxi.categorie="+"'"+categorie+"'";
-		String request = "SELECT * FROM Taxi WHERE NOT EXISTS (SELECT * FROM Reservation WHERE Taxi.idTaxi=Reservation.idTaxi)";
+		String request = "SELECT * FROM Taxi"; 
+		String requestVilleCategorieTarif = "SELECT * FROM Taxi WHERE ville="+"'"+ville+"' and categorie="+"'"+categorie+"' and tarifDeBase<"+tarif;
+		String requestVilleCategorie = "SELECT * FROM Taxi WHERE ville="+"'"+ville+"' and categorie="+"'"+categorie+"'";
+		String requestVilleTarif = "SELECT * FROM Taxi WHERE ville="+"'"+ville+"' and tarifDeBase="+tarif;
+		String requestCategorieTarif = "SELECT * FROM Taxi WHERE categorie="+"'"+categorie+"' and tarifDeBase<"+tarif;
+		String requestCategorie = "SELECT * FROM Taxi WHERE categorie="+"'"+categorie+"'";
+		String requestVille = "SELECT * FROM Taxi WHERE ville="+"'"+ville+"'";
+		String requestTarif = "SELECT * FROM Taxi WHERE tarifDeBase<"+tarif;
 		
-		//Taxi taxi = new Taxi();
-		System.out.println("Ville: "+ville);
-		System.out.println("Categorie: "+categorie);
 		try {
 			Statement stat = connexionBDD().createStatement();
-			if(ville.equals("null") && !categorie.equals("null")) {
-				stat.executeQuery(requestCategorie); //OK
-				System.out.println("RequeteCategorie effecu�e");
-			}
-			if(categorie.equals("null") && !ville.equals("null")) {
-				stat.executeQuery(requestVille); //OK
-				System.out.println("RequeteVille effecu�e");
-			}
-			if(ville.equals("null") && categorie.equals("null")) {
-				stat.executeQuery(request); //OK
-			}
-			if(!categorie.equals("null") && !ville.equals("null")) {
-				stat.executeQuery(requestVilleCategorie); //OK
-				System.out.println("RequeteVilleCategorie effecu�e");	
+			if(idTaxi==0){
+				if(ville.equals("null") && tarif==null && categorie.equals("null")){
+					stat.executeQuery(request);
+				} else if (ville.equals("null") && categorie.equals("null")){
+					stat.executeQuery(requestTarif);
+				} else if (ville.equals("null") && tarif==null){
+					stat.executeQuery(requestCategorie);
+				} else if (categorie.equals("null") && tarif==null){
+					stat.executeQuery(requestVille);
+				} else if (ville.equals("null")){
+					stat.executeQuery(requestCategorieTarif);
+				} else if (categorie.equals("null")){
+					stat.executeQuery(requestVilleTarif);
+				} else if (tarif==null){
+					stat.executeQuery(requestVilleCategorie);
+				} else {
+					stat.executeQuery(requestVilleCategorieTarif);
+				}	
+			} else {
+				stat.executeQuery("SELECT * FROM Taxi WHERE idTaxi ="+idTaxi);
 			}
 			
 			ResultSet rset = stat.getResultSet();
@@ -63,11 +73,8 @@ public class GestionTaxi implements GestionTaxiSEI {
 				taxiTrouve.setIdTaxi(rset.getInt("idTaxi"));
 				taxiTrouve.setCategorie(rset.getString("categorie"));
 				taxiTrouve.setVille(rset.getString("ville"));
-				taxiTrouve.setTarifDeBase(rset.getString("tarifDeBase"));
+				taxiTrouve.setTarifDeBase(rset.getFloat("tarifDeBase"));
 				result.add(taxiTrouve);
-			}
-			for(int i=0;i<result.size();i++) {
-				System.out.println("taxis="+result.get(i).getIdTaxi());
 			}
 			rset.close();
 			stat.close();
@@ -80,43 +87,53 @@ public class GestionTaxi implements GestionTaxiSEI {
 	
 	
 	public int reserverTaxi(ReservationTaxi reservation) throws SQLException {
-		//int idTaxi, String date, String destination, int idClient
+		
 		String date = reservation.getDateReservation();
-		String ville = reservation.getVille();
-		String destination = reservation.getDestination();
-		int paiementEffectue;
-		if(reservation.isPaiementEffectue()==false) {
-			paiementEffectue = 0;
-		}
-		else {
-			paiementEffectue = 1;
-		}
-		int idClient = reservation.getIdClient();
 		int idTaxi = reservation.getIdTaxi();
+		String destination = reservation.getDestination();
+		int idClient = reservation.getIdClient();
+		Boolean paiementEffectue = reservation.isPaiementEffectue();
+		int paiement=0;
 		
+		if(paiementEffectue){
+			paiement = 1;
+		} else {
+			paiement = 0;
+		}
 		
-		String requestInsert = "INSERT INTO Reservation VALUES ('0','"
-				+date+"','"
-                +ville+"','"
-				+destination+"','"
-				+paiementEffectue+"','"
-				+idClient+"','"
-				+idTaxi+"')";
+		//On vérifie qu'il n'existe pas déjà une réservation pour le même taxi à la même date
+		//On se place dans le cas ou une réservation = 1h
+		String requestVerification = "SELECT * FROM Reservation WHERE idTaxi="+idTaxi+" AND dateReservation='"+date+"' OR ABS(TIMESTAMPDIFF(MINUTE,'"+date+"',dateReservation))<60";
+		if(!requestVerification.isEmpty()){
+			System.out.println("Il existe déjà une réservation à la même heure. Veuillez sélectionner une autre heure ou un autre taxi");
+		} 
+			//Requetes
+			
+			String requestInsert = "INSERT INTO Reservation(dateReservation,destination,booleenPaimentEffectue,idClient,idTaxi) VALUES ("
+					+date+"','"
+					+destination+"','"
+					+paiementEffectue+"','"
+					+idClient+"','"
+					+idTaxi+"')";
+			
+			String requestIdReservation = "SELECT idReservation FROM Reservation WHERE Reservation.idClient="+idClient
+					+" and Reservation.idTaxi="+idTaxi
+					+" and Reservation.booleenPaiementEffectue="+paiementEffectue
+					+" and Reservation.destination="+destination
+					+" and Reservation.dateReservation"+date;
+					
+					
+			Statement stat1 = connexionBDD().createStatement();
+			Statement stat2 = connexionBDD().createStatement();
+			stat1.executeUpdate(requestInsert);
+			stat2.executeQuery(requestIdReservation);
 		
-		String requestIdReservation = "SELECT idReservation FROM Reservation WHERE Reservation.idClient="+idClient
-				+" and Reservation.idTaxi="+idTaxi
-				+" and Reservation.booleenPaiementEffectue="+paiementEffectue
-				+" and Reservation.destination="+destination
-				+" and Reservation.ville="+ville;
-				
 	
-		Statement stat1 = connexionBDD().createStatement();
-		Statement stat2 = connexionBDD().createStatement();
-		stat1.executeUpdate(requestInsert);
-		stat2.executeQuery(requestIdReservation);
-		System.out.println("ID DE RESERVATION: "+Integer.parseInt(stat2.getResultSet().getString("idReservation")));
 		return Integer.parseInt(stat2.getResultSet().getString("idReservation"));
 	}
+	
+	
+	
 
 	public boolean annulerTaxi(int idReservation) throws SQLException {
 		boolean annuler=false;

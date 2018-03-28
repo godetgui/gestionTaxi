@@ -35,18 +35,28 @@ public class RechercherTaxi extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String ville = request.getParameter("ville");
-		String date = request.getParameter("annee")+"-"+request.getParameter("mois")+"-"+request.getParameter("jour")+"/"+request.getParameter("heure")+":"+request.getParameter("minute")+":00";
-		//"2018-03-16/14:20:00"
+		String date = request.getParameter("date");
+		String time = request.getParameter("time");
+		//"2018-03-16 14:20:00"
 		String categorie = request.getParameter("categorie");
-		String destination = request.getParameter("destination");
-		System.out.println("DESTINATIOOOOOOOOON: "+destination);
+		String tarif = request.getParameter("tarif");
+	
 		GestionTaxi gestionTaxi = new GestionTaxi();
-		ArrayList<Taxi> taxis = gestionTaxi.trouverTaxi(new Taxi(categorie, ville));
+		
+		//Gestions des champs non remplis
+		Taxi taxi = new Taxi();
+		taxi.setCategorie(categorie);
+		taxi.setVille(ville);
+		if(tarif.equals("null")){
+			taxi.setTarifDeBase(null);
+		} else {
+			taxi.setTarifDeBase(Float.parseFloat(tarif));
+		}
+		ArrayList<Taxi> taxis = gestionTaxi.trouverTaxi(taxi);
 		HttpSession session = request.getSession();
 		session.setAttribute("taxis", taxis);
 		session.setAttribute("date", date);
-		session.setAttribute("destination", destination);
-		session.setAttribute("ville", ville);
+		session.setAttribute("time", date);
 		RequestDispatcher dispat = request.getRequestDispatcher("TrouverTaxijsp.jsp");
 		dispat.forward(request, response);
 	}

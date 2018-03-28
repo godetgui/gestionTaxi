@@ -27,19 +27,19 @@
 				    <div class="carousel-item active">
 				      <img class="d-block w-100" src="<c:url value="/images/bienvenue.png"/>" alt="First slide">
 				      <div class="carousel-caption">
-        				<h3><a href="">Réserver un taxi</a></h3>
+        				<h3 id="carouseltitle"><a href="Formulaire">Réserver un taxi</a></h3>
      				  </div>
 				    </div>
 				    <div class="carousel-item">
 				      <img class="d-block w-100" src="<c:url value="/images/angers.png"/>" alt="Second slide">
 				      <div class="carousel-caption">
-        				<h3><a href="">Nouvelle ville disponible : Angers !</a></h3>
+        				<h3 id="carouseltitle">Nouvelle ville disponible : Angers !</h3>
      				  </div>
 				    </div>
 				    <div class="carousel-item">
 				      <img class="d-block w-100" src="<c:url value="/images/tuktuk.png"/>" alt="Third slide">
 				      <div class="carousel-caption">
-        				<h3><a href="">Le tuk-tuk débarque à Paris !</a></h3>
+        				<h3 id="carouseltitle">Le tuk-tuk débarque à Paris !</h3>
      				  </div>
 				    </div>
 				  </div>

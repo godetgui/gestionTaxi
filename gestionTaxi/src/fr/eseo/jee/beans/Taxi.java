@@ -9,15 +9,10 @@ public class Taxi {
 	private int idTaxi;
 	private String categorie;
 	private String ville;
-	private String tarifDeBase;
+	private Float tarifDeBase;
 
 	public Taxi() {
 		super();
-	}
-	
-	public Taxi(String categorie, String ville) {
-		this.categorie=categorie;
-		this.ville=ville;
 	}
 
 	public int getIdTaxi() {
@@ -44,12 +39,15 @@ public class Taxi {
 		this.ville = ville;
 	}
 	
-	public String getTarifDeBase() {
+	public Float getTarifDeBase() {
 		return tarifDeBase;
 	}
 	
-	public void setTarifDeBase(String tarifDeBase) {
+	public void setTarifDeBase(Float tarifDeBase) {
 		this.tarifDeBase = tarifDeBase;
 	}
 	
+	public String toString(){
+		return "Taxi numéro "+this.idTaxi+ " catégorie : "+this.categorie+" ville : "+this.ville+ "tarif : "+this.tarifDeBase;
+	}
 }

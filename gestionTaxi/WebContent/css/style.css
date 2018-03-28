@@ -32,50 +32,8 @@ footer {
 }
 
 
-/* ATTRIBUTS DES PANELS PRIMARY */
-
-.panel-primary {
-	color:#333;
-    background-color:#fff ;
-    border-color:#337ab7 ;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-}
-
-.panel-primary>.panel-heading{
-	color: #fff;
-    background-color: #337ab7;
-    border-color: #337ab7;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-}
-
-.panel-default>.panel-body{
-    color: #333;
-    background-color: #fff;
-    border-color: #337ab7;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-}
-
-/* ATTRIBUTS DES PANELS DEFAUT */
-
-.panel-default {
-	color: #333;
-    background-color: #fff;
-    border-color: #ddd;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-}
-
-.panel-default>.panel-heading{
-	color: #333;
-    background-color: #f5f5f5;
-    border-color: #ddd;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-}
-
-.panel-default>.panel-body{
-    color: #333;
-    background-color: #fff;
-    border-color: #337ab7;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+#carouseltitle {
+	color:white;
 }
 
 /* ATTRIBUTS DES BOUTONS */

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
@@ -12,8 +13,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eseo.jee.beans.ReservationTaxi;
+import fr.eseo.jee.beans.Taxi;
 import fr.eseo.jee.ws.GestionTaxi;
 
 /**
@@ -38,32 +41,20 @@ public class ReserverTaxi extends HttpServlet {
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		String date = request.getParameter("date");
-		String destination = request.getParameter("destination");
-		String ville = request.getParameter("ville");
-		int paimentEffectue = Integer.parseInt(request.getParameter("paimentEffectue"));
-		int idClient = Integer.parseInt(request.getParameter("idClient"));
-		int idTaxi = Integer.parseInt(request.getParameter("idTaxi"));
-		System.out.println("DATE dans ReserverTaxi: "+date);
-		System.out.println("DESTINATION dans ReserverTaxi: "+destination);
-		System.out.println("PAIEMENT dans ReserverTaxi: "+paimentEffectue);
-		System.out.println("IDCLIENT dans ReserverTaxi: "+idClient);
-		System.out.println("IDTAXI dans ReserverTaxi: "+idTaxi);
-		GestionTaxi gestionTaxi = new GestionTaxi();
-		try {
-			if(paimentEffectue==0) {
-				booleanPaiementEffectue = false;
-			}
-			else {
-				booleanPaiementEffectue = true;
-			}
-			
-			gestionTaxi.reserverTaxi(new ReservationTaxi(date, ville, destination, booleanPaiementEffectue, idTaxi, idClient));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 		
-		RequestDispatcher dispat = request.getRequestDispatcher("ConfirmationReservation.jsp");
+		
+		int idTaxi = Integer.parseInt(request.getParameter("idTaxi"));
+		
+		Taxi taxi = new Taxi();
+		taxi.setIdTaxi(idTaxi);
+		
+		GestionTaxi gestionTaxi = new GestionTaxi();
+		ArrayList<Taxi> taxiReservation = gestionTaxi.trouverTaxi(taxi);
+		HttpSession session = request.getSession();
+		session.setAttribute("taxiReservation", taxiReservation);
+		
+		
+		RequestDispatcher dispat = request.getRequestDispatcher("DetailsReservation.jsp");
 		dispat.forward(request, response);
 		
 	}

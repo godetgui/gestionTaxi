@@ -39,10 +39,6 @@ public class GestionClient {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("Dans GestionClient: ");
-		System.out.println(client.getNom());
-		System.out.println(client.getPrenom());
-		System.out.println(client.getIdClient());
 		return client;
 	}
 	

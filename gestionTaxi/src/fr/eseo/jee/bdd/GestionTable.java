@@ -20,13 +20,52 @@ public class GestionTable {
 			DriverManager.registerDriver(new Driver());
 			Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/gestionTaxi?&characterEncoding=UTF8&useSSL=true&user=root&password=root");
 			Statement stat = connect.createStatement();
-//			stat.executeQuery("SELECT COUNT(DISTINCT Taxi.ville) AS nombre FROM TAXI");
 			stat.executeQuery("SELECT Taxi.ville FROM Taxi GROUP BY Taxi.ville");
 			ResultSet rset = stat.getResultSet();
 			while(rset.next()) {
 				result.add(rset.getString("ville"));
 			}
-			System.out.println("RESULT="+result);
+			rset.close();
+			stat.close();
+			connect.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+
+	public static ArrayList<String> getCategories() {
+		ArrayList<String> result=new ArrayList<String>();
+		try {
+			DriverManager.registerDriver(new Driver());
+			Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/gestionTaxi?&characterEncoding=UTF8&useSSL=true&user=root&password=root");
+			Statement stat = connect.createStatement();
+			stat.executeQuery("SELECT Taxi.categorie FROM Taxi GROUP BY Taxi.categorie");
+			ResultSet rset = stat.getResultSet();
+			while(rset.next()) {
+				result.add(rset.getString("categorie"));
+			}
+			rset.close();
+			stat.close();
+			connect.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static ArrayList<Float> getTarifs() {
+		ArrayList<Float> result=new ArrayList<Float>();
+		try {
+			DriverManager.registerDriver(new Driver());
+			Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/gestionTaxi?&characterEncoding=UTF8&useSSL=true&user=root&password=root");
+			Statement stat = connect.createStatement();
+			stat.executeQuery("SELECT Taxi.tarifDeBase FROM Taxi GROUP BY Taxi.tarifDeBase");
+			ResultSet rset = stat.getResultSet();
+			while(rset.next()) {
+				result.add(rset.getFloat("tarifDeBase"));
+			}
 			rset.close();
 			stat.close();
 			connect.close();

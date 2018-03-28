@@ -19,7 +19,7 @@
 		<div class="col-xl-1">
 			<form method ="post" action="GererNouveauClient">
 				<fieldset class="form-group">
-	    			<legend>Veuillez entrer vos informations:</legend>
+	    			<legend>Veuillez entrer vos informations :</legend>
 					<div class="form-group">
 	    				<label for="nom">Nom:</label>
 	    				<input type="text" class="form-control" name="nom" id="nom" aria-describedby="votrenom" placeholder="Votre nom de famille" required>
