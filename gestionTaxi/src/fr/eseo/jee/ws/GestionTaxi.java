@@ -101,32 +101,44 @@ public class GestionTaxi implements GestionTaxiSEI {
 			paiement = 0;
 		}
 		
+		System.out.println(date);
+		System.out.println(idTaxi);
+		
+		
 		//On vérifie qu'il n'existe pas déjà une réservation pour le même taxi à la même date
 		//On se place dans le cas ou une réservation = 1h
-		String requestVerification = "SELECT * FROM Reservation WHERE idTaxi="+idTaxi+" AND dateReservation='"+date+"' OR ABS(TIMESTAMPDIFF(MINUTE,'"+date+"',dateReservation))<60";
-		if(!requestVerification.isEmpty()){
+		String requestVerification = "SELECT * FROM Reservation WHERE idTaxi="+idTaxi+" AND dateReservation='"+date+"' OR  idTaxi="+idTaxi+" AND ABS(TIMESTAMPDIFF(MINUTE,'"+date+"',dateReservation))<60";
+		Statement stat3 = connexionBDD().createStatement();
+		System.out.println("test1");
+		ResultSet rs =  stat3.executeQuery(requestVerification);
+		System.out.println("test1");
+		if(rs.next()){
 			System.out.println("Il existe déjà une réservation à la même heure. Veuillez sélectionner une autre heure ou un autre taxi");
 		} 
 			//Requetes
 			
-			String requestInsert = "INSERT INTO Reservation(dateReservation,destination,booleenPaimentEffectue,idClient,idTaxi) VALUES ("
+			String requestInsert = "INSERT INTO Reservation(dateReservation,destination,booleenPaiementEffectue,idClient,idTaxi) VALUES ('"
 					+date+"','"
-					+destination+"','"
-					+paiementEffectue+"','"
-					+idClient+"','"
-					+idTaxi+"')";
+					+destination+"',"
+					+paiementEffectue+","
+					+idClient+","
+					+idTaxi+")";
 			
 			String requestIdReservation = "SELECT idReservation FROM Reservation WHERE Reservation.idClient="+idClient
 					+" and Reservation.idTaxi="+idTaxi
 					+" and Reservation.booleenPaiementEffectue="+paiementEffectue
-					+" and Reservation.destination="+destination
-					+" and Reservation.dateReservation"+date;
-					
-					
+					+" and Reservation.destination= '"+destination
+					+"' and Reservation.dateReservation= '"+date+"'";
+				
+			System.out.println("test1");
 			Statement stat1 = connexionBDD().createStatement();
+			System.out.println("test2");
 			Statement stat2 = connexionBDD().createStatement();
+			System.out.println("test3");
 			stat1.executeUpdate(requestInsert);
+			System.out.println("test4");
 			stat2.executeQuery(requestIdReservation);
+			System.out.println("test5");
 		
 	
 		return Integer.parseInt(stat2.getResultSet().getString("idReservation"));

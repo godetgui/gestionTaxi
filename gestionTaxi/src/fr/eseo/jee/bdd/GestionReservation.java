@@ -24,7 +24,6 @@ public class GestionReservation {
 	}
 	
 	public ArrayList<ReservationTaxi> trouverReservation(int idClient) {
-		System.out.println("DANS GESTION_RESERVATION");
 
 		String reservations = "SELECT * FROM Reservation  WHERE Reservation.idClient="+idClient;
 		ArrayList<ReservationTaxi> listReservations = new ArrayList<ReservationTaxi>();
@@ -33,7 +32,6 @@ public class GestionReservation {
 			Statement stat = connexionBDD().createStatement();
 			stat.executeQuery(reservations);
 			ResultSet rset = stat.getResultSet();
-			System.out.println(rset.getFetchSize());
 			while(rset.next()) {
 				ReservationTaxi reservation = new ReservationTaxi();
 				reservation.setIdReservation(rset.getInt("idReservation"));

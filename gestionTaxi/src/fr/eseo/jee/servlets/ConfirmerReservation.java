@@ -46,8 +46,9 @@ public class ConfirmerReservation extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		
-		int idClient = (int) session.getAttribute("idClient");
 		int idTaxi = (int) session.getAttribute("idTaxi");
+		int idClient = (int) session.getAttribute("idClient");
+		
 		
 		if(date.equals("null")){
 			System.out.println("Il manque la date");
@@ -61,11 +62,11 @@ public class ConfirmerReservation extends HttpServlet {
 		if(!date.matches(".*-.*-.*")){
 			System.out.println("Le format de la date n'est pas bon");
 		}
-		if(!date.matches(".*:.*:.*")){
+		if(!time.matches(".*:.*:.*")){
 			System.out.println("Le format de l'horaire n'est pas le bon");
 		}
 		
-		String dateComplete = date + " " + time;
+		String dateComplete = date.substring(6, 10) + "-" + date.substring(3,5) + "-" + date.substring(0,2) + " " + time;
 
 		ReservationTaxi reservation = new ReservationTaxi();
 		reservation.setDateReservation(dateComplete);
@@ -78,6 +79,7 @@ public class ConfirmerReservation extends HttpServlet {
 		int idReservation=0;
 		try {
 			idReservation = gestionTaxi.reserverTaxi(reservation);
+			System.out.println("id : "+idReservation);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

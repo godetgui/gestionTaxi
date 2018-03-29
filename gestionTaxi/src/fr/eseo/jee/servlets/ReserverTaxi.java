@@ -52,6 +52,7 @@ public class ReserverTaxi extends HttpServlet {
 		ArrayList<Taxi> taxiReservation = gestionTaxi.trouverTaxi(taxi);
 		HttpSession session = request.getSession();
 		session.setAttribute("taxiReservation", taxiReservation);
+		session.setAttribute("idTaxi", idTaxi);
 		
 		
 		RequestDispatcher dispat = request.getRequestDispatcher("DetailsReservation.jsp");
