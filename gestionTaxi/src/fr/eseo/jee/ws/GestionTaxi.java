@@ -150,16 +150,17 @@ public class GestionTaxi implements GestionTaxiSEI {
 	public boolean annulerTaxi(int idReservation) throws SQLException {
 		boolean annuler=false;
 		
-		String requeteAnnuler = "DELETE * FROM Reservation WHERE Reservation.idReservation="+idReservation;
-		String requeteVerification = "DELETE * FROM Reservation WHERE Reservation.idReservation="+idReservation;
+		String requeteAnnuler = "DELETE FROM Reservation WHERE Reservation.idReservation= '"+idReservation+"'";
+		String requeteVerification = "DELETE FROM Reservation WHERE Reservation.idReservation= '"+idReservation+"'";
 		
 		Statement stat1 = connexionBDD().createStatement();
 		Statement stat2 = connexionBDD().createStatement();
-		stat1.executeQuery(requeteAnnuler);
-		stat2.executeQuery(requeteVerification);
+		stat1.executeUpdate(requeteAnnuler);
+		System.out.println("test6");
 		
-		if(requeteVerification == null) {
+		if((stat2.executeUpdate(requeteVerification))==0) {
 			annuler = true;
+			System.out.println("test7");
 		}
 		else{
 			annuler = false;

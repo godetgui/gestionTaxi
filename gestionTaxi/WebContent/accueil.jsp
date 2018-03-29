@@ -96,7 +96,10 @@
 				       		<input type="submit" class="btn btn-warning" value="Payer"> 
 				       </form></td>
      				   <td><form method="post" action="AnnulerReservation">
-							<input type=hidden name=idReservation id=idReservation value=<%=listreservations.get(i).getIdReservation()%>/>
+							<input type=hidden name=idReservation id=idReservation value=<%=listreservations.get(i).getIdReservation()%>>
+							<input type=hidden name=dateReservation id=dateReservation value=<%=listreservations.get(i).getDateReservation()%>>
+							<input type=hidden name=destination id=destination value=<%=listreservations.get(i).getDestination()%>>
+							<input type=hidden name=paiement id=paiement value=<%=listreservations.get(i).isPaiementEffectue()%>>
 				       		<input type="submit" class="btn btn-warning" value="Annuler"> 
 				       </form></td>
     			</tr>
