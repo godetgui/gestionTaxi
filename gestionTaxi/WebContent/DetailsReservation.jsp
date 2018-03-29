@@ -52,11 +52,11 @@
 				<fieldset class="form-group">
 					<div class="form-group">
 	  					<label for="date">Date de réservation : </label>
-  						<input class="form-control" value="JJ-MM-AAAA" type="date" name ="date" id="date" aria-describedby="date" placeholder="19-01-2018" >
+  						<input class="form-control" value="JJ-MM-AAAA" type="text" name ="date" id="date" aria-describedby="date" placeholder="19-01-2018" >
   					</div>
   					<div class="form-group">
 	  					<label for="time">Heure de réservation : </label>
-  						<input class="form-control" value="HH:MM:SS" type="time" name ="time" id="time" aria-describedby="time" placeholder="13:45" >
+  						<input class="form-control" value="HH:MM:SS" type="text" name ="time" id="time" aria-describedby="time" placeholder="13:45" >
   					</div>
 	  				<div class="form-group">
 	    				<label for="destination">Destination : </label>
