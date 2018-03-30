@@ -86,13 +86,18 @@
 				       <td><%=listreservations.get(i).getDateReservation()%></td>
 				       
 				       <td><%=listreservations.get(i).getDestination()%></td>
-				       <td><%=listreservations.get(i).isPaiementEffectue()%></td>
+				       <% if(listreservations.get(i).isPaiementEffectue()==true){%>
+				       <td>Validé</td>
+				       <%}%>
+				       <% if(listreservations.get(i).isPaiementEffectue()==false){%>
+				       <td>En attente</td>
+				       <%}%>
 				       <td><form method="post" action="PayerReservation">
-							<input type=hidden name=idReservation id=idReservation value=<%=listreservations.get(i).getIdReservation()%>/>
-							<input type=hidden name=dateReservation id=dateReservation value=<%=listreservations.get(i).getDateReservation()%>/>
+							<input type=hidden name=idReservation id=idReservation value=<%=listreservations.get(i).getIdReservation()%>>
+							<input type=hidden name=dateReservation id=dateReservation value=<%=listreservations.get(i).getDateReservation()%>>
 							
-							<input type=hidden name=destination id=destination value=<%=listreservations.get(i).getDestination()%>/>
-							<input type=hidden name=paiement id=paiement value=<%=listreservations.get(i).isPaiementEffectue()%>/>
+							<input type=hidden name=destination id=destination value=<%=listreservations.get(i).getDestination()%>>
+							<input type=hidden name=paiement id=paiement value=<%=listreservations.get(i).isPaiementEffectue()%>>
 				       		<input type="submit" class="btn btn-warning" value="Payer"> 
 				       </form></td>
      				   <td><form method="post" action="AnnulerReservation">

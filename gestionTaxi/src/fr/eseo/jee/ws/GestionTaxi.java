@@ -169,6 +169,16 @@ public class GestionTaxi implements GestionTaxiSEI {
 	}
 	
 	
+	public String payerTaxi(int idReservation) throws SQLException {
+		String requetePaiement = "UPDATE Reservation SET booleenPaiementEffectue = '1' WHERE idReservation="+idReservation;
+		Statement stat = connexionBDD().createStatement();
+		stat.executeUpdate(requetePaiement);
+		System.out.println("Je suis dans PayerTaxi()");
+		
+		return "Paiement Effectué pour la réservation n° "+idReservation;
+	}
+	
+	
 }
 
 
