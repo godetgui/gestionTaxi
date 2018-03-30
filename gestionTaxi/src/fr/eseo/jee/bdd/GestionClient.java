@@ -41,6 +41,8 @@ public class GestionClient {
 		}
 		return client;
 	}
+	
+	
 	public Client trouverClientByID(int idClient) {
 		String request = "SELECT * FROM Client WHERE idClient="+"'"+idClient+"'";
 		Client client = new Client();

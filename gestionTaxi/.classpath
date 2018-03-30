@@ -4,5 +4,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="/Users/alexaupetit1/Downloads/mysql-connector-java-5.1.45/mysql-connector-java-5.1.45-bin.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Apache"/>
+	<classpathentry kind="lib" path="/Users/alexaupetit1/Documents/Eseo/I2/EclipseJEE/so-manager/WebContent/WEB-INF/lib/jstl-1.2.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
