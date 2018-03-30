@@ -9,7 +9,7 @@
 <head>
 	<link rel="stylesheet" href="Style.css">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Paiement</title>
+	<title>Réservation confirmée</title>
 	<link rel="stylesheet" href='<c:url value="/css/bootstrap.min.css"/>'>
 	<link rel="stylesheet" href='<c:url value="/css/style.css"/>'>
 </head>
@@ -18,7 +18,7 @@
 	<c:import url="/inc/navbar.jsp" />
 	<div class="container">
 		<div class="col-xl-1">
-			<h1>Votre commande a bien été enregistrée !</h1>
+			<h1>Votre réservation a bien été enregistrée !</h1>
 			<form method="post" action="GererDejaClient">
 				<fieldset class="form-group">
 					<div class="form-group">

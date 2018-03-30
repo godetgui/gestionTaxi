@@ -101,22 +101,20 @@ public class GestionTaxi implements GestionTaxiSEI {
 			paiement = 0;
 		}
 		
-		System.out.println(date);
-		System.out.println(idTaxi);
-		
-		
 		//On vérifie qu'il n'existe pas déjà une réservation pour le même taxi à la même date
 		//On se place dans le cas ou une réservation = 1h
 		String requestVerification = "SELECT * FROM Reservation WHERE idTaxi="+idTaxi+" AND dateReservation='"+date+"' OR  idTaxi="+idTaxi+" AND ABS(TIMESTAMPDIFF(MINUTE,'"+date+"',dateReservation))<60";
+		
 		Statement stat3 = connexionBDD().createStatement();
-		System.out.println("test1");
 		ResultSet rs =  stat3.executeQuery(requestVerification);
-		System.out.println("test1");
+		int idRes;
 		if(rs.next()){
 			System.out.println("Il existe déjà une réservation à la même heure. Veuillez sélectionner une autre heure ou un autre taxi");
-		} 
+			idRes=0;
+		} else{
 			//Requetes
-			
+		
+			stat3.close();
 			String requestInsert = "INSERT INTO Reservation(dateReservation,destination,booleenPaiementEffectue,idClient,idTaxi) VALUES ('"
 					+date+"','"
 					+destination+"',"
@@ -130,18 +128,23 @@ public class GestionTaxi implements GestionTaxiSEI {
 					+" and Reservation.destination= '"+destination
 					+"' and Reservation.dateReservation= '"+date+"'";
 				
-			System.out.println("test1");
 			Statement stat1 = connexionBDD().createStatement();
-			System.out.println("test2");
-			Statement stat2 = connexionBDD().createStatement();
-			System.out.println("test3");
+			Statement statT = connexionBDD().createStatement();
 			stat1.executeUpdate(requestInsert);
-			System.out.println("test4");
-			stat2.executeQuery(requestIdReservation);
-			System.out.println("test5");
-		
-	
-		return Integer.parseInt(stat2.getResultSet().getString("idReservation"));
+			ResultSet rsT = statT.executeQuery(requestIdReservation);
+			//on place le curseur sur le dernier tuple 
+			rsT.last(); 
+			//on récupère le numéro de la ligne 
+			int nombreLignes = rsT.getRow(); 
+			//on replace le curseur avant la première ligne 
+			rsT.first(); 
+			stat1.close();
+			
+			idRes = Integer.parseInt(rsT.getString("idReservation"));
+			
+		}
+
+		return idRes;
 	}
 	
 	
@@ -180,3 +183,5 @@ public class GestionTaxi implements GestionTaxiSEI {
 	
 	
 }
+
+
