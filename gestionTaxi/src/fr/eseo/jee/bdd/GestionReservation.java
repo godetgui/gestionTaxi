@@ -38,7 +38,13 @@ public class GestionReservation {
 				reservation.setDateReservation(rset.getString("dateReservation"));
 				reservation.setDestination(rset.getString("destination"));
 				reservation.setIdTaxi(rset.getInt("idTaxi"));
-				reservation.setPaiementEffectue(false);
+				if(rset.getInt("booleenPaiementEffectue")==1) {
+					reservation.setPaiementEffectue(true);
+				}
+				if(rset.getInt("booleenPaiementEffectue")==0) {
+					reservation.setPaiementEffectue(false);
+				}
+				
 				listReservations.add(reservation);
 			}
 			

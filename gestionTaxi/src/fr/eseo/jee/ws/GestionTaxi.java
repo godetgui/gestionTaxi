@@ -101,20 +101,22 @@ public class GestionTaxi implements GestionTaxiSEI {
 			paiement = 0;
 		}
 		
+		System.out.println(date);
+		System.out.println(idTaxi);
+		
+		
 		//On vérifie qu'il n'existe pas déjà une réservation pour le même taxi à la même date
 		//On se place dans le cas ou une réservation = 1h
 		String requestVerification = "SELECT * FROM Reservation WHERE idTaxi="+idTaxi+" AND dateReservation='"+date+"' OR  idTaxi="+idTaxi+" AND ABS(TIMESTAMPDIFF(MINUTE,'"+date+"',dateReservation))<60";
-		
 		Statement stat3 = connexionBDD().createStatement();
+		System.out.println("test1");
 		ResultSet rs =  stat3.executeQuery(requestVerification);
-		int idRes;
+		System.out.println("test1");
 		if(rs.next()){
 			System.out.println("Il existe déjà une réservation à la même heure. Veuillez sélectionner une autre heure ou un autre taxi");
-			idRes=0;
-		} else{
+		} 
 			//Requetes
-		
-			stat3.close();
+			
 			String requestInsert = "INSERT INTO Reservation(dateReservation,destination,booleenPaiementEffectue,idClient,idTaxi) VALUES ('"
 					+date+"','"
 					+destination+"',"
@@ -128,23 +130,18 @@ public class GestionTaxi implements GestionTaxiSEI {
 					+" and Reservation.destination= '"+destination
 					+"' and Reservation.dateReservation= '"+date+"'";
 				
+			System.out.println("test1");
 			Statement stat1 = connexionBDD().createStatement();
-			Statement statT = connexionBDD().createStatement();
+			System.out.println("test2");
+			Statement stat2 = connexionBDD().createStatement();
+			System.out.println("test3");
 			stat1.executeUpdate(requestInsert);
-			ResultSet rsT = statT.executeQuery(requestIdReservation);
-			//on place le curseur sur le dernier tuple 
-			rsT.last(); 
-			//on récupère le numéro de la ligne 
-			int nombreLignes = rsT.getRow(); 
-			//on replace le curseur avant la première ligne 
-			rsT.first(); 
-			stat1.close();
-			
-			idRes = Integer.parseInt(rsT.getString("idReservation"));
-			
-		}
-
-		return idRes;
+			System.out.println("test4");
+			stat2.executeQuery(requestIdReservation);
+			System.out.println("test5");
+		
+	
+		return Integer.parseInt(stat2.getResultSet().getString("idReservation"));
 	}
 	
 	
@@ -153,16 +150,17 @@ public class GestionTaxi implements GestionTaxiSEI {
 	public boolean annulerTaxi(int idReservation) throws SQLException {
 		boolean annuler=false;
 		
-		String requeteAnnuler = "DELETE * FROM Reservation WHERE Reservation.idReservation="+idReservation;
-		String requeteVerification = "DELETE * FROM Reservation WHERE Reservation.idReservation="+idReservation;
+		String requeteAnnuler = "DELETE FROM Reservation WHERE Reservation.idReservation= '"+idReservation+"'";
+		String requeteVerification = "DELETE FROM Reservation WHERE Reservation.idReservation= '"+idReservation+"'";
 		
-		Statement stat4 = connexionBDD().createStatement();
-		Statement stat5 = connexionBDD().createStatement();
-		stat4.executeQuery(requeteAnnuler);
-		stat5.executeQuery(requeteVerification);
+		Statement stat1 = connexionBDD().createStatement();
+		Statement stat2 = connexionBDD().createStatement();
+		stat1.executeUpdate(requeteAnnuler);
+		System.out.println("test6");
 		
-		if(requeteVerification == null) {
+		if((stat2.executeUpdate(requeteVerification))==0) {
 			annuler = true;
+			System.out.println("test7");
 		}
 		else{
 			annuler = false;
@@ -171,6 +169,14 @@ public class GestionTaxi implements GestionTaxiSEI {
 	}
 	
 	
+	public String payerTaxi(int idReservation) throws SQLException {
+		String requetePaiement = "UPDATE Reservation SET booleenPaiementEffectue = '1' WHERE idReservation="+idReservation;
+		Statement stat = connexionBDD().createStatement();
+		stat.executeUpdate(requetePaiement);
+		System.out.println("Je suis dans PayerTaxi()");
+		
+		return "Paiement Effectué pour la réservation n° "+idReservation;
+	}
+	
+	
 }
-
-

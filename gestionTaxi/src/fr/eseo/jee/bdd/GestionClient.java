@@ -41,6 +41,28 @@ public class GestionClient {
 		}
 		return client;
 	}
+	public Client trouverClientByID(int idClient) {
+		String request = "SELECT * FROM Client WHERE idClient="+"'"+idClient+"'";
+		Client client = new Client();
+		try {
+			Statement stat = connexionBDD().createStatement();
+			stat.executeQuery(request);
+			ResultSet rset = stat.getResultSet();
+			while(rset.next()) {
+				client.setNom(rset.getString("nom"));
+				client.setPrenom(rset.getString("prenom"));
+				client.setIdClient(Integer.parseInt(rset.getString("idClient")));
+				client.setAdresse(rset.getString("adresse"));
+				client.setTelephone(rset.getString("telephone"));
+		}
+			rset.close();
+			stat.close();
+			connexionBDD().close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return client;
+	}
 	
 	public void creerNouveauClient(String nom, String prenom, String adresse, String numeroTel) throws SQLException {
 		String request = "INSERT INTO Client(nom,prenom,adresse,telephone) VALUES('"+ nom+"','"+prenom+"','"+adresse+"','"+numeroTel+"');";
