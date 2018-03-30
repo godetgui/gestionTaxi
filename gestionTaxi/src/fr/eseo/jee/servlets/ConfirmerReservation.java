@@ -79,15 +79,17 @@ public class ConfirmerReservation extends HttpServlet {
 		int idReservation=0;
 		try {
 			idReservation = gestionTaxi.reserverTaxi(reservation);
-			System.out.println("id : "+idReservation);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		session.setAttribute("idReservation", idReservation);
-		RequestDispatcher dispat = request.getRequestDispatcher("ConfirmationReservation.jsp");
-		dispat.forward(request, response);
+		if(idReservation==0){
+			System.out.println("Erreur : la réservation n'a pas fonctionné");
+		} else {
+			session.setAttribute("idReservation", idReservation);
+			RequestDispatcher dispat = request.getRequestDispatcher("ConfirmationReservation.jsp");
+			dispat.forward(request, response);
+		}
 		
 	}
 
